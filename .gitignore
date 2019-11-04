@@ -1,3 +1,11 @@
 bin/
 obj/
 /packages/
+/.vs/SeaBattle2/DesignTimeBuild/.dtbcache
+/.vs/SeaBattle2/v16/.suo
+/.vs/SeaBattle2/v16/Server/sqlite3/db.lock
+/.vs/SeaBattle2/v16/Server/sqlite3/storage.ide
+/.vs/SeaBattle2/v16/Server/sqlite3/storage.ide-shm
+/.vs/SeaBattle2/v16/Server/sqlite3/storage.ide-wal
+/.vs/SeaBattle2/v16/TestStore/0/testlog.manifest
+/SeaBattle2.sln.DotSettings.user

@@ -15,9 +15,18 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="SeaBattle2.sln" t="IncludeFlat" />
       <e p="SeaBattle2Lib" t="IncludeRecursive">
+        <e p="AbstractSession.cs" t="Include" />
+        <e p="AI.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CellStatus.cs" t="Include" />
         <e p="ClassDiagram1.cd" t="Include" />
+        <e p="Coordinates.cs" t="Include" />
+        <e p="CrossfireShooting.cs" t="Include" />
+        <e p="Game.cs" t="Include" />
+        <e p="InvalidMapSizeException.cs" t="Include" />
         <e p="Map.cs" t="Include" />
+        <e p="Mapholder.cs" t="Include" />
+        <e p="MapSizeIsTooSmallException.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">
@@ -25,7 +34,11 @@
             </e>
           </e>
         </e>
+        <e p="RandomShooting.cs" t="Include" />
         <e p="SeaBattle2Lib.csproj" t="IncludeRecursive" />
+        <e p="ShootingMethod.cs" t="Include" />
+        <e p="ShotAlong.cs" t="Include" />
+        <e p="правила игры.txt" t="Include" />
         <e p="Шаблоны проектирования.txt" t="Include" />
       </e>
       <e p="SeaBattle2TelegramServer" t="IncludeRecursive">
@@ -44,6 +57,8 @@
         <e p="AITests.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="MapCreatingTests.cs" t="Include" />
+        <e p="MapholderAtomicMethodsTest.cs" t="Include" />
+        <e p="MapholderTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">
