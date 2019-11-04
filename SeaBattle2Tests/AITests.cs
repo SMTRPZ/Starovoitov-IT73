@@ -3,11 +3,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SeaBattle2Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class AITests
     {
         [TestMethod]
         public void TestMethod1()
         {
         }
+        
+        
     }
 }

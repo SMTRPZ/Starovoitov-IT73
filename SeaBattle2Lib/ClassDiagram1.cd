@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SeaBattle2Lib.AI">
+    <Position X="2" Y="5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>AI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.RandomShooting">
+    <Position X="1" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RandomShooting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.CrossfireShooting">
+    <Position X="3.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CrossfireShooting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.ShotAlong">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShotAlong.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.ShootingMethod" Collapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShootingMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.AbstractSession">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>AbstractSession.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="game" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SeaBattle2Lib.Mapholder">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapholder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SeaBattle2Lib.Map">
+    <Position X="6.25" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAgAAAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="CellsStatuses" />
+    </ShowAsCollectionAssociation>
+  </Struct>
+  <Struct Name="SeaBattle2Lib.Game">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <AssociationLine Name="Player1Map" Type="SeaBattle2Lib.Map">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.081" Y="-0.359" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEIAAACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Player1Map" />
+      <Field Name="Player2Map" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="SeaBattle2Lib.Coordinates">
+    <Position X="2.5" Y="10.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
+      <FileName>Coordinates.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="SeaBattle2Lib.CellStatus">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAEAAAAAAAAAAAAAAAAAAAgAAAAACAAAACAAAA=</HashCode>
+      <FileName>CellStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
