@@ -43,36 +43,41 @@ namespace SeaBattle2Lib
         public static int GetMaxShipLengthByArea(int width,int height, double coverageArea)
         {
             int totalArea = width * height;
-            double filledArea = 0;
+            int countOfFilledCells = 0;
             int maxShipLength = 0;
 
-            bool areaLimitIsNotExceeded = IsAreaLimitIsNotExceeded(filledArea,totalArea,coverageArea);
+            bool areaLimitIsNotExceeded = IsAreaLimitIsNotExceeded(countOfFilledCells, totalArea,coverageArea);
             bool maximumLengthOfTheShipIsNotExceeded = IsMaximumLengthOfTheShipIsNotExceeded(maxShipLength, width, height);
             
             while (areaLimitIsNotExceeded && maximumLengthOfTheShipIsNotExceeded)
             {
                 maxShipLength++;
-                int countOfFilledCells = GetFilledAreaByMaxShipLength(maxShipLength);
-                filledArea = 1d* countOfFilledCells / totalArea;
-
+                countOfFilledCells = GetFilledAreaByMaxShipLength(maxShipLength);
                 
                 //Обновление условий
-                areaLimitIsNotExceeded = filledArea <= totalArea * coverageArea;
-                maximumLengthOfTheShipIsNotExceeded = maxShipLength <= width && maxShipLength <= height;
+                areaLimitIsNotExceeded = IsAreaLimitIsNotExceeded(countOfFilledCells, totalArea, coverageArea);
+                maximumLengthOfTheShipIsNotExceeded = IsMaximumLengthOfTheShipIsNotExceeded(maxShipLength, width, height);
             }
 
             maxShipLength--;
             return maxShipLength;
         }
 
-        public static bool IsAreaLimitIsNotExceeded(double filledArea, int totalArea, double coverageArea)
+        public static bool IsAreaLimitIsNotExceeded(int countOfFilledCells, int totalArea, double coverageArea)
         {
-            return filledArea <= totalArea * coverageArea;
+            if (countOfFilledCells < 0)
+                throw new ArgumentOutOfRangeException(nameof(countOfFilledCells));
+            if (totalArea < 0)
+                throw new ArgumentOutOfRangeException(nameof(totalArea));
+            if (coverageArea < 0 || coverageArea > 1)
+                throw new ArgumentOutOfRangeException(nameof(coverageArea));
+            
+            return countOfFilledCells <= totalArea * coverageArea;
         }
 
         public  static bool IsMaximumLengthOfTheShipIsNotExceeded(int maxShipLength, int width, int height)
         {
-            return maxShipLength <= width && maxShipLength <= height;
+            return maxShipLength <= width || maxShipLength <= height;
         }
         
         public static int GetFilledAreaByMaxShipLength(int maxShipLength)
