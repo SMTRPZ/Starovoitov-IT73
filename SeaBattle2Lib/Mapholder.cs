@@ -2,30 +2,73 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.SymbolStore;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Threading;
 
 namespace SeaBattle2Lib
 {
-    //Можно сразу определить набор кораблей,
-    //которые нужно разместить
-    //Варианты:
-    //1) решение в лоб
-    //    создаём количество карт равное кол-ву кораблей
-    //    случайно размещаем корабли
-    //    пытаемся пересечь карты, контролируя, чтобы корабли не стояли близко друг к другу
-    //    если не получилось значит пытаемся N раз перегенерировать тот слой
-    //    если не получилось после N раз, то вызываем полную перегенерацию
-    //    
-    //    при этом контролируем  кол-во полных перегенераций
-    //    если оно больше Z, то бросаем ошибку
-
-    
+  
     public static class Mapholder
     {
         public const double CoverageArea = 0.2;
         public const int NumberOfAttemptsToRecreateTheMap = 15;
-        
+
+        public static void StupidFillOutTheMap(ref Map map, Random random = null)
+        {
+            int area = map.Height * map.Width;
+            if(random==null)
+                random=new Random();
+            
+            //Меньше одной клетки для вставки корабля
+            if (CoverageArea * area < 1)
+                throw new MapSizeIsTooSmallException();
+
+            int numberOfFailedAttempts = 0;
+            
+            int numberOfCellsLeftToFill = (int) Math.Floor(CoverageArea *area) ;
+            while(numberOfCellsLeftToFill != 0){
+                if( numberOfFailedAttempts >1000)
+                    break;
+                var coordinates = new Coordinates(random.Next(map.Width), random.Next(map.Height));
+                if (!CanInsertAShip(ref map, coordinates))
+                {
+                    numberOfFailedAttempts++;
+                    continue;
+                }
+                map.CellsStatuses[coordinates.X, coordinates.Y] = CellStatus.PartOfShip;
+                numberOfCellsLeftToFill--;
+            }
+
+            if (numberOfCellsLeftToFill != 0)
+                throw new Exception("Ошибка заполнения карты");
+        }
+
+        private static bool CanInsertAShip(ref Map map, Coordinates coordinates)
+        {
+            for (int xDelta = -1; xDelta <= 1; xDelta++)
+            {
+                for (int yDelta = -1; yDelta <= 1; yDelta++)
+                {
+                    int tmpX = coordinates.X + xDelta;
+                    int tmpY = coordinates.Y + yDelta;
+                    
+                    if(tmpX<0||map.Width<=tmpX)
+                        continue;
+                    if(tmpY<0||map.Height<=tmpY)
+                        continue;
+
+                    var currentCell = map.CellsStatuses[tmpX, tmpY];
+                    if (currentCell == CellStatus.PartOfShip)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+
         public static void FillOutTheMap(ref Map map)
         {
             int height = map.Height;
@@ -47,7 +90,6 @@ namespace SeaBattle2Lib
             CheckCompliance(ref map);
 
         }
-
         public static bool CheckCompliance(ref Map map)
         {
          
@@ -105,7 +147,6 @@ namespace SeaBattle2Lib
 
             return true;
         }
-
         private static void IntersectLayers(MapLayer[] mapLayers, Map map, int width, int height)
         {
             //Пересечение набора карт (слоёв) с результирующей картой
@@ -192,9 +233,72 @@ namespace SeaBattle2Lib
             }
             return totalCellCount;
         }
-        private static Map RandomGenerateMapWithOneShip(int mapWidth, int mapHeight, int shipLength)
+        public static Map RandomGenerateMapWithOneShip(int mapWidth, int mapHeight, int shipLength, Random random = null)
         {
-            throw new NotImplementedException();
+            if (shipLength > mapHeight && shipLength > mapWidth)
+                throw new ArgumentException("Длинна корабля не может быть одновременно больше и длинны и ширины");
+
+            var map = new Map(mapWidth, mapHeight);
+            
+            if(random==null)
+                random = new Random();
+            
+            var startCoordinates = new Coordinates(random.Next(mapWidth), random.Next(mapHeight));
+            var endCoordinates = GetAllPossibilities(startCoordinates, shipLength, mapWidth, mapHeight);
+
+            //TODO STUB
+            if (endCoordinates.Count == 0)
+            {
+                startCoordinates = random.Next()%2==0 ? new Coordinates(0, random.Next(mapHeight)) : new Coordinates(random.Next(mapWidth), 0);
+                endCoordinates = GetAllPossibilities(startCoordinates, shipLength, mapWidth, mapHeight);
+            }
+               
+            int index = random.Next(endCoordinates.Count);
+            
+            //Важно: сортировка
+            int leftX = Math.Min(endCoordinates[index].X, startCoordinates.X);
+            int rightX = Math.Max(endCoordinates[index].X, startCoordinates.X);
+            
+            int downY = Math.Min(endCoordinates[index].Y, startCoordinates.Y);
+            int upY = Math.Max(endCoordinates[index].Y, startCoordinates.Y);
+            
+            for (int x = leftX; x <= rightX; x++)
+            {
+                for (int y = downY; y <= upY; y++)
+                {
+                    map.CellsStatuses[x, y] = CellStatus.PartOfShip;
+                }
+            }
+            
+            return map;
+        }
+        private static List<Coordinates> GetAllPossibilities(Coordinates startCoordinates, int shipLength, int mapWidth, int mapHeight)
+        {
+            //поправка на то, что одна клетка уже занята
+            shipLength--;
+            
+            List<Coordinates> coordinates = new List<Coordinates>();
+            //Вверх
+            var coordinateUp = new Coordinates(startCoordinates.X, startCoordinates.Y + shipLength);
+            if(coordinateUp.Y<mapHeight)
+                coordinates.Add(coordinateUp);
+            
+            //Вниз
+            var coordinateDown = new Coordinates(startCoordinates.X, startCoordinates.Y - shipLength);
+            if(0<=coordinateDown.Y)
+                coordinates.Add(coordinateDown);
+            
+            //Вправо
+            var coordinateRight = new Coordinates(startCoordinates.X + shipLength, startCoordinates.Y);
+            if(coordinateRight.X<mapWidth)
+                coordinates.Add(coordinateRight);
+            
+            //Влево
+            var coordinateLeft = new Coordinates(startCoordinates.X - shipLength, startCoordinates.Y);
+            if(0<=coordinateLeft.X)
+                coordinates.Add(coordinateLeft);
+            
+            return coordinates;
         }
     }
 }

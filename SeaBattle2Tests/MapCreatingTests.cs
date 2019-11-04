@@ -25,7 +25,6 @@ namespace SeaBattle2Tests
                 Assert.Fail();
             }
         }
-
         [TestMethod]
         public void MapWidthDoesNotChangeAfterCreation()
         {
@@ -37,7 +36,6 @@ namespace SeaBattle2Tests
             //Assert
             Assert.AreEqual(10, map.Width);            
         }
-
         [TestMethod]
         public void MapHeightDoesNotChangeAfterCreation()
         {
@@ -49,7 +47,6 @@ namespace SeaBattle2Tests
             //Assert
             Assert.AreEqual(5, map.Height);
         }
-
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize1()
         {
@@ -66,7 +63,6 @@ namespace SeaBattle2Tests
             }
 
         }
-
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize2()
         {
@@ -85,7 +81,6 @@ namespace SeaBattle2Tests
             }
 
         }
-
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize3()
         {

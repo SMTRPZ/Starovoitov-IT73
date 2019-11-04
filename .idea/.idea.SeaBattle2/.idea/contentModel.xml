@@ -71,6 +71,7 @@
         </e>
         <e p="readme.txt" t="Include" />
         <e p="SeaBattle2Tests.csproj" t="IncludeRecursive" />
+        <e p="StupidMapholderTests.cs" t="Include" />
       </e>
     </e>
   </component>

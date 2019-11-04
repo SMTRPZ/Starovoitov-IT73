@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBattle2Lib;
 
 namespace SeaBattle2Tests
@@ -150,6 +151,38 @@ namespace SeaBattle2Tests
                 }
             }
             
+        }
+
+        [DataTestMethod]
+        [DataRow(10,10,5)]
+        [DataRow(100,100,5)]
+        [DataRow(7,7,3)]
+        [DataRow(7,7,4)]
+        [DataRow(7,7,5)]
+        [DataRow(7,7,6)]
+        [DataRow(7,7,7)]
+        [DataRow(2,2,2)]
+        public void RandomGenerateMapWithOneShip(int width, int height, int shipLength)
+        {
+            //Arrange
+            Random random = new Random(3141559);
+            
+            //Act
+            var map = Mapholder.RandomGenerateMapWithOneShip(width, height,shipLength,random);
+            int countOfShipCells = 0;
+          
+            for (int x = 0; x < map.Width; x++)
+            {
+                for (int y = 0; y < map.Height; y++)
+                {
+                    var currentCell = map.CellsStatuses[x, y];
+                    if (currentCell == CellStatus.PartOfShip)
+                        countOfShipCells++;
+                }
+            }
+                
+            //Assert
+            Assert.AreEqual(shipLength,countOfShipCells);
         }
     }
 }

@@ -15,12 +15,10 @@ namespace SeaBattle2Tests
         [DataRow(1,2)]
         [DataRow(1,3)]
         [DataRow(1,4)] 
-        
         [DataRow(1,1)]
         [DataRow(2,1)]
         [DataRow(3,1)]
         [DataRow(4,1)]
-        
         [DataRow(2,2)]
         public void FillOutATooSmallMap(int width, int height)
         {
@@ -117,6 +115,31 @@ namespace SeaBattle2Tests
             Assert.IsFalse(mapIsOk);
         }
 
+//        [TestMethod]
+//        public void MapFilling_1()
+//        {
+//            //Arrange
+//            Map map = new Map(5,40);
+//            
+//            //Act
+//            Mapholder.FillOutTheMap(ref map);
+//            bool containsPartOfShip = false;
+//            for (int x  = 0; x  < map.Width; x ++)
+//            {
+//                for (int y = 0; y <map.Height; y++)
+//                {
+//                    var currentCell = map.CellsStatuses[x, y];
+//                    if (currentCell == CellStatus.PartOfShip)
+//                    {
+//                        containsPartOfShip = true;
+//                        break;
+//                    }
+//                }
+//            }
+//            
+//            //Assert
+//            Assert.IsTrue(containsPartOfShip);
+//        }
         
    
     }
