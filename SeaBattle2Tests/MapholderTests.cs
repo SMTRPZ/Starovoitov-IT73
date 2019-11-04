@@ -39,25 +39,84 @@ namespace SeaBattle2Tests
             }
            
         }
-
-        [DataTestMethod]
-        [DataRow(1,5)]
-        public void TheShipsDoNotTouchEachOther(int width, int height)
+        [TestMethod]
+        public void TheShipsDoNotTouchEachOther_1()
         {
             //Arrange
-            Map map = new Map(width, height);
+            Map map = new Map(5, 5);
+            map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
+            map.CellsStatuses[1, 1] = CellStatus.PartOfShip;
             
             //Act
-            Mapholder.CheckCompliance(ref map);
+            bool mapIsOk = Mapholder.CheckCompliance(ref map);
            
             //Assert
-            //TODO пройтись по карте и проверить, что в радиусе 1 нет кораблей
-            //Горизонтальный проход
-            //Вертикальный проход
-            //Проход по двум диагоналям
+            Assert.IsFalse(mapIsOk);
+        }
+        [TestMethod]
+        public void TheShipsDoNotTouchEachOther_2()
+        {
+            //Arrange
+            Map map = new Map(5, 5);
+            map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
+            map.CellsStatuses[0, 1] = CellStatus.PartOfShip;
+            
+            //Act
+            bool mapIsOk = Mapholder.CheckCompliance(ref map);
+           
+            //Assert
+            Assert.IsTrue(mapIsOk);
+        }
+        [TestMethod]
+        public void TheShipsDoNotTouchEachOther_3()
+        {
+            //Arrange
+            Map map = new Map(5, 5);
+            map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
+            map.CellsStatuses[0, 1] = CellStatus.PartOfShip;
+            map.CellsStatuses[1, 1] = CellStatus.PartOfShip;
+            
+            //Act
+            bool mapIsOk = Mapholder.CheckCompliance(ref map);
+           
+            //Assert
+            Assert.IsFalse(mapIsOk);
+        }
+        [TestMethod]
+        public void TheShipsDoNotTouchEachOther_4()
+        {
+            //Arrange
+            Map map = new Map(5, 5);
+            map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
+            map.CellsStatuses[2, 2] = CellStatus.PartOfShip;
+            map.CellsStatuses[4, 4] = CellStatus.PartOfShip;
+            
+            //Act
+            bool mapIsOk = Mapholder.CheckCompliance(ref map);
+           
+            //Assert
+            Assert.IsTrue(mapIsOk);
+        }
+        [TestMethod]
+        public void TheShipsDoNotTouchEachOther_5()
+        {
+            //Arrange
+            Map map = new Map(5, 5);
+            map.CellsStatuses[0, 1] = CellStatus.PartOfShip;
+            map.CellsStatuses[0, 2] = CellStatus.PartOfShip;
+            map.CellsStatuses[0, 3] = CellStatus.PartOfShip;
+            
+            map.CellsStatuses[1, 1] = CellStatus.PartOfShip;
+            map.CellsStatuses[1, 2] = CellStatus.PartOfShip;
+            map.CellsStatuses[1, 3] = CellStatus.PartOfShip;
+
+            //Act
+            bool mapIsOk = Mapholder.CheckCompliance(ref map);
+           
+            //Assert
+            Assert.IsFalse(mapIsOk);
         }
 
-      
         
    
     }

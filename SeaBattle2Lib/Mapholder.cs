@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -49,58 +50,57 @@ namespace SeaBattle2Lib
 
         public static bool CheckCompliance(ref Map map)
         {
-            bool previousCellWasAShip = false;
-            
-            /*Диагональный проход слева вправо вверх*/
-            for (int y = 0; y < map.Height; y++)
+         
+            //Пройтись по всем клеткам и для каждой проверить соседей по диагоналям
+            for (int x = 0; x < map.Width; x++)
             {
-                int tmpX = 0;
-                int tmpY = y;
-                previousCellWasAShip = false;
-                
-                while (tmpX<map.Width && tmpY < map.Height)
+                for (int y = 0; y < map.Height; y++)
                 {
-                    CellStatus currentCell = map.CellsStatuses[tmpX, tmpY];
-                    if (previousCellWasAShip && currentCell == CellStatus.PartOfShip)
-                        return false;
-
+                    var currentCell = map.CellsStatuses[x, y];
+                    //В клетке находится часть корабля
                     if (currentCell == CellStatus.PartOfShip)
-                        previousCellWasAShip = true;
-                    else
-                        previousCellWasAShip = false;
+                    {
+                        bool canCheckUpLeft = true;
+                        bool canCheckUpRight = true;
+                        bool canCheckDownLeft = true;
+                        bool canCheckDownRight = true;
 
-                    tmpX++;
-                    tmpY++;
+                        if (x == 0)
+                        {
+                            canCheckUpLeft = false;
+                            canCheckDownLeft = false;
+                        
+                        }else if (x == map.Width - 1)
+                        {
+                            canCheckDownRight = false;
+                            canCheckUpRight = false;
+                        }
+
+                        if (y == 0)
+                        {
+                            canCheckDownLeft = false;
+                            canCheckDownRight = false;
+                        }else if (y == map.Height - 1)
+                        {
+                            canCheckUpLeft = false;
+                            canCheckUpRight = false;
+                        }
+                        
+                        
+                        
+                        if (canCheckUpRight && map.CellsStatuses[x + 1, y + 1] == CellStatus.PartOfShip)
+                            return false;
+                        if (canCheckDownRight && map.CellsStatuses[x + 1, y - 1] == CellStatus.PartOfShip)
+                            return false;
+                        if(canCheckDownLeft && map.CellsStatuses[x - 1, y - 1] == CellStatus.PartOfShip)
+                            return false;
+                        if (canCheckUpLeft && map.CellsStatuses[x - 1, y + 1] == CellStatus.PartOfShip)
+                            return false;
+                    }
                 }
             }
             
-            /*Диагональный проход снизу вправо вверх*/
-            for (int x = 1; x < map.Height; x++)
-            {
-                int tmpX = x;
-                int tmpY = 0;
-                previousCellWasAShip = false;
-
-                while (tmpX<map.Width && tmpY < map.Height)
-                {
-                    CellStatus currentCell = map.CellsStatuses[tmpX, tmpY];
-                    if (previousCellWasAShip && currentCell == CellStatus.PartOfShip)
-                        return false;
-
-                    if (currentCell == CellStatus.PartOfShip)
-                        previousCellWasAShip = true;
-                    else
-                        previousCellWasAShip = false;
-
-                    tmpX++;
-                    tmpY++;
-                }
-            }
-            
-            
-            
-            
-            /*Проверить количество кораблей конкретного размера*/
+            /*TODO Проверить количество кораблей конкретного размера*/
             
 
             return true;
