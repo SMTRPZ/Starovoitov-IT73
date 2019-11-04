@@ -18,6 +18,29 @@ namespace SeaBattle2Lib
             CellsStatuses = new CellStatus[width, height];
         }
 
+        public bool TryToCross(ref Map map)
+        {
+            if (map.Height != Height || map.Width != Width)
+                throw new TryingToCrossMapsOfDifferentSizesException();
+
+            for (int loopWidth = 0; loopWidth < Width; loopWidth++)
+            {
+                for (int loopHeight = 0; loopHeight < Height; loopHeight++)
+                {
+                    //Если корабль накладывается на другой корабль, то пересечь не удалось
+                    if (map.CellsStatuses[loopWidth, loopHeight] == CellStatus.PartOfShip 
+                        && CellsStatuses[loopWidth, loopHeight] == CellStatus.PartOfShip)
+                        return false;
+                    
+                    CellsStatuses[loopWidth, loopHeight] = map.CellsStatuses[loopWidth,loopHeight];
+                }
+            }
+
+
+            return true;
+        }
+        
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Map))

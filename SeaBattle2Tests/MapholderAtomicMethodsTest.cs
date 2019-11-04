@@ -38,5 +38,118 @@ namespace SeaBattle2Tests
             Assert.IsTrue(isMaximumLengthOfTheShipIsNotExceeded);
         }
 
+        
+          [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_1()
+        {
+            //Arrange
+            int maxLenght = 1;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(1, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_2()
+        {
+            //Arrange
+            int maxLenght = 2;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(4, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_3()
+        {
+            //Arrange
+            int maxLenght = 3;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(10, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_4()
+        {
+            //Arrange
+            int maxLenght = 4;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(20, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_5()
+        {
+            //Arrange
+            int maxLenght = 5;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(35, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetFilledAreaByMaxShipLength_6()
+        {
+            //Arrange
+            int maxLenght = 6;
+            //Act
+            int cellCount = Mapholder.GetFilledAreaByMaxShipLength(maxLenght);
+            //Assert
+            Assert.AreEqual(56, cellCount);
+        }
+        
+        [TestMethod]
+        public void Mapholder_GetMaxShipLengthByArea_1()
+        {
+            //Arrange
+            int width = 100;
+            int height = 100;
+            int area = width * height;
+            double coverageArea = Mapholder.CoverageArea;
+            
+            //Act
+            int maxShipLength = Mapholder.GetMaxShipLengthByArea(width, height, coverageArea);
+            int filledAreaMax = Mapholder.GetFilledAreaByMaxShipLength(maxShipLength);
+            int filledAreaTooBig = Mapholder.GetFilledAreaByMaxShipLength(maxShipLength+1);
+            
+            //Assert
+            Assert.AreEqual(21, maxShipLength);
+            Assert.IsTrue(Mapholder.IsAreaLimitIsNotExceeded(filledAreaMax,area,coverageArea));
+            Assert.IsFalse(Mapholder.IsAreaLimitIsNotExceeded(filledAreaTooBig,area,coverageArea));
+        }
+        
+        
+        [TestMethod]
+        public void Mapholder_GetMaxShipLengthByArea_Many()
+        {
+            double coverageArea = Mapholder.CoverageArea;
+            
+            for (int width = 1; width < 10_000; width += 490)
+            {
+                for (int height = 1; height < 10_000; height+=159)
+                {
+                    //Arrange
+                    int area = width * height;
+           
+                    //Act
+                    int maxShipLength = Mapholder.GetMaxShipLengthByArea(width, height, coverageArea);
+            
+                    int filledAreaMax = Mapholder.GetFilledAreaByMaxShipLength(maxShipLength);
+                    int filledAreaTooBig = Mapholder.GetFilledAreaByMaxShipLength(maxShipLength+1);
+            
+                    //Assert
+                    Assert.IsTrue(Mapholder.IsAreaLimitIsNotExceeded(filledAreaMax,area,coverageArea));
+                    Assert.IsFalse(Mapholder.IsAreaLimitIsNotExceeded(filledAreaTooBig,area,coverageArea));
+                }
+            }
+            
+        }
     }
 }

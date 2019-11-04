@@ -26,6 +26,7 @@
         <e p="InvalidMapSizeException.cs" t="Include" />
         <e p="Map.cs" t="Include" />
         <e p="Mapholder.cs" t="Include" />
+        <e p="MapLayer.cs" t="Include" />
         <e p="MapSizeIsTooSmallException.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -38,6 +39,8 @@
         <e p="SeaBattle2Lib.csproj" t="IncludeRecursive" />
         <e p="ShootingMethod.cs" t="Include" />
         <e p="ShotAlong.cs" t="Include" />
+        <e p="TotalZrada.cs" t="Include" />
+        <e p="TryingToCrossMapsOfDifferentSizesException.cs" t="Include" />
         <e p="правила игры.txt" t="Include" />
         <e p="Шаблоны проектирования.txt" t="Include" />
       </e>
