@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -42,17 +43,67 @@ namespace SeaBattle2Lib
             
             //Проверка соблюдения правил располажения кораблей
 
-            CheckCompliance(map);
+            CheckCompliance(ref map);
 
         }
 
-        private static bool CheckCompliance(Map map)
+        public static bool CheckCompliance(ref Map map)
         {
-            int x = 0;
+            bool previousCellWasAShip = false;
+            
+            /*Диагональный проход слева вправо вверх*/
             for (int y = 0; y < map.Height; y++)
             {
-                    
+                int tmpX = 0;
+                int tmpY = y;
+                previousCellWasAShip = false;
+                
+                while (tmpX<map.Width && tmpY < map.Height)
+                {
+                    CellStatus currentCell = map.CellsStatuses[tmpX, tmpY];
+                    if (previousCellWasAShip && currentCell == CellStatus.PartOfShip)
+                        return false;
+
+                    if (currentCell == CellStatus.PartOfShip)
+                        previousCellWasAShip = true;
+                    else
+                        previousCellWasAShip = false;
+
+                    tmpX++;
+                    tmpY++;
+                }
             }
+            
+            /*Диагональный проход снизу вправо вверх*/
+            for (int x = 1; x < map.Height; x++)
+            {
+                int tmpX = x;
+                int tmpY = 0;
+                previousCellWasAShip = false;
+
+                while (tmpX<map.Width && tmpY < map.Height)
+                {
+                    CellStatus currentCell = map.CellsStatuses[tmpX, tmpY];
+                    if (previousCellWasAShip && currentCell == CellStatus.PartOfShip)
+                        return false;
+
+                    if (currentCell == CellStatus.PartOfShip)
+                        previousCellWasAShip = true;
+                    else
+                        previousCellWasAShip = false;
+
+                    tmpX++;
+                    tmpY++;
+                }
+            }
+            
+            
+            
+            
+            /*Проверить количество кораблей конкретного размера*/
+            
+
+            return true;
         }
 
         private static void IntersectLayers(MapLayer[] mapLayers, Map map, int width, int height)

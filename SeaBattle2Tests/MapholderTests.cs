@@ -48,7 +48,7 @@ namespace SeaBattle2Tests
             Map map = new Map(width, height);
             
             //Act
-            Mapholder.FillOutTheMap(ref map);
+            Mapholder.CheckCompliance(ref map);
            
             //Assert
             //TODO пройтись по карте и проверить, что в радиусе 1 нет кораблей
