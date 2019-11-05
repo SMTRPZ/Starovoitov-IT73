@@ -1,4 +1,5 @@
-﻿using SeaBattle2Lib.GameLogic;
+﻿using SeaBattle2Lib;
+using SeaBattle2Lib.GameLogic;
 
 namespace SeaBattle2TelegramServer
 {
@@ -9,6 +10,11 @@ namespace SeaBattle2TelegramServer
         public void RecreateGame(int width, int height)
         {
             game = new Game(width, height);
+        }
+
+        public void ShootingForThePlayer(Coordinates coordinates)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

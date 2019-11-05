@@ -51,6 +51,7 @@
       </e>
       <e p="SeaBattle2TelegramServer" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="ClassDiagram1.cd" t="Include" />
         <e p="MessageHandlers" t="Include">
           <e p="CommandHandler.cs" t="Include" />
           <e p="CoordinatesHandler.cs" t="Include" />
