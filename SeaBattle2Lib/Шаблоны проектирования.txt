@@ -1,3 +1,0 @@
-﻿strategy для выстрелов
-chain of responsibility -  для обработки сообщений от игрока
-publisher subscriber - для уведомления о окончании игры

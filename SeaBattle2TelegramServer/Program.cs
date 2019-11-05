@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace SeaBattle2TelegramServer
 {
@@ -6,7 +7,8 @@ namespace SeaBattle2TelegramServer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            new TelegramNegotiator().StartConversation();
+            Task.Delay(int.MaxValue).Wait();
         }
     }
 }

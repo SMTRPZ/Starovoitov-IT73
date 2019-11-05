@@ -45,6 +45,12 @@ namespace SeaBattle2Lib
                 throw new Exception("Ошибка заполнения карты");
         }
 
+        public static Map GenerateFilledMap(int width, int height)
+        {
+            var map = new Map(width, height);
+            StupidFillOutTheMap(ref map);
+            return map;
+        }
         private static bool CanInsertAShip(ref Map map, Coordinates coordinates)
         {
             for (int xDelta = -1; xDelta <= 1; xDelta++)

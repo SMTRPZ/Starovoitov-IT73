@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace SeaBattle2Lib
+namespace SeaBattle2Lib.GameLogic
 {
     public struct Game
     {
         private Map Player1Map;
         private Map Player2Map;
 
-        public Game(int mapHeight, int mapWidth)
+        public Game(int mapWidth,int mapHeight)
         {
-            //Заполнить карты с помощью фабрики
-            throw new NotImplementedException();
+            Player1Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
+            Player2Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
         }
 
     

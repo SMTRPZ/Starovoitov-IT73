@@ -38,7 +38,7 @@
   <Class Name="SeaBattle2Lib.AbstractSession">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>AbstractSession.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -46,16 +46,16 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="SeaBattle2Lib.Mapholder">
-    <Position X="7.75" Y="4.75" Width="1.5" />
+    <Position X="8.5" Y="4.75" Width="6" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAQAAAAAAgAABAAAAEQAAIQAIAAJEQABAAAA=</HashCode>
       <FileName>Mapholder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="SeaBattle2Lib.Map">
     <Position X="6.25" Y="1.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAgAAAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <HashCode>AAAAAAAAhAAAAAAAgAAAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>Map.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
