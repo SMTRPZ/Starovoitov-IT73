@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using SeaBattle2TelegramServer.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -17,16 +18,17 @@ namespace SeaBattle2TelegramServer
         private static readonly Dictionary<int, TelegramSession> Sessions = new Dictionary<int, TelegramSession>();
         private MessageHandler Handler;
         
-        
+        MessageСonveyor _messageСonveyor =new MessageСonveyor(); 
         public void StartConversation()
         {
             //Настройка конвеера обработки сообщений
             //Фильтровать текст по командам
-            Handler = new CommandHandler();
-                
+            _messageСonveyor.AddHandler(new CommandHandler());
             //Фильтровать текст по координатам
-                
+            _messageСonveyor.AddHandler(new CoordinatesHandler());
             //Непонятно что пришло
+            _messageСonveyor.AddHandler(new IncomprehensibleMessageHandler());
+            
             
             //Запуск бота
             _bot = new TelegramBotClient(BotToken);
@@ -45,7 +47,7 @@ namespace SeaBattle2TelegramServer
                 Console.WriteLine($"Пришло сообщение {e.Message.Text}");
                 TelegramSession currentSession = GetTelegramSession(message);
 
-                Handler?.HandleMessage(message,currentSession, _bot);
+                _messageСonveyor.HandleMessage(message, currentSession, _bot);
             }
             catch (Exception eee)
             {

@@ -5,7 +5,6 @@ namespace SeaBattle2TelegramServer.MessageHandlers
 {
     class CommandHandler:MessageHandler
     {
-        public CommandHandler(MessageHandler successor=null):base(successor){}
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
         {
             string text = message?.Text;

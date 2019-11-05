@@ -53,7 +53,10 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="MessageHandlers" t="Include">
           <e p="CommandHandler.cs" t="Include" />
+          <e p="CoordinatesHandler.cs" t="Include" />
+          <e p="IncomprehensibleMessageHandler.cs" t="Include" />
           <e p="MessageHandler.cs" t="Include" />
+          <e p="MessageСonveyor.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
