@@ -21,28 +21,34 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 int[] shotCoordinates = Regex.Matches(text, "\\d+")
                     .Select(x => int.Parse(x.Value))
                     .ToArray();
-
-                 
                 
                 //два числа в строке
                 if (shotCoordinates.Length == 2)
-                {
-                    
-                    bot.SendTextMessageAsync(message.From.Id,
-                        $"Сударь, похоже, что вы пытаетесь выстрелить по координатам {shotCoordinates[0]} {shotCoordinates[1]}. Но нет.");
-                    bot.SendTextMessageAsync(message.From.Id, "Ну я попытаюсь.");
-                
+                { 
                     Coordinates coordinates = new Coordinates(shotCoordinates[0], shotCoordinates[1]);
-
                     try
                     {
                         session.ShootingForThePlayer(coordinates);
+                        try
+                        {
+                            Stub.SendPlayground(message, session, bot);
+                        }
+                        catch (Exception e)
+                        {
+                            bot.SendTextMessageAsync(message.From.Id,
+                                $"Не удалось отправить акртинку поля боя. {e.Message}");
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+                    {
+                        bot.SendTextMessageAsync(message.From.Id, $"Неверные координаты. Вы можете стрелять только в диапазоне  (0-{session.GetGameCopy().Player2Map.Width-1}) (0-{session.GetGameCopy().Player2Map.Height-1})");
                     }
                     catch (Exception e)
                     {
                         bot.SendTextMessageAsync(message.From.Id, $"Не удалось сделать выстрел. Причина: {e.Message}");
                     }
-                    
+
+                   
                 }
                 else
                 {
@@ -55,6 +61,8 @@ namespace SeaBattle2TelegramServer.MessageHandlers
             
             
         }
+        
+        
         
     }
 }

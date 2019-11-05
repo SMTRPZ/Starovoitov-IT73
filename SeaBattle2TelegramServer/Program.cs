@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SeaBattle2TelegramServer
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {

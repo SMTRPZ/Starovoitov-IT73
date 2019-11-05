@@ -48,7 +48,8 @@ namespace SeaBattle2Lib
         public static Map GenerateFilledMap(int width, int height)
         {
             var map = new Map(width, height);
-            StupidFillOutTheMap(ref map);
+//            StupidFillOutTheMap(ref map);
+            map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
             return map;
         }
         private static bool CanInsertAShip(ref Map map, Coordinates coordinates)

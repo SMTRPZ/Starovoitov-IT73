@@ -52,6 +52,10 @@
       <e p="SeaBattle2TelegramServer" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="ClassDiagram1.cd" t="Include" />
+        <e p="Draw" t="Include">
+          <e p="DrawingEngine.cs" t="Include" />
+          <e p="PlaygroundType.cs" t="Include" />
+        </e>
         <e p="MessageHandlers" t="Include">
           <e p="CommandHandler.cs" t="Include" />
           <e p="CoordinatesHandler.cs" t="Include" />
@@ -69,6 +73,7 @@
         <e p="Program.cs" t="Include" />
         <e p="readme.txt" t="Include" />
         <e p="SeaBattle2TelegramServer.csproj" t="IncludeRecursive" />
+        <e p="Stub.cs" t="Include" />
         <e p="TelegramNegotiator.cs" t="Include" />
         <e p="TelegramSession.cs" t="Include" />
       </e>

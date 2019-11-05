@@ -7,6 +7,11 @@ namespace SeaBattle2TelegramServer
     {
         private Game game;
 
+        public Game GetGameCopy()
+        {
+            return game;
+        }
+
         public void RecreateGame(int width, int height)
         {
             game = new Game(width, height);
@@ -14,7 +19,9 @@ namespace SeaBattle2TelegramServer
 
         public void ShootingForThePlayer(Coordinates coordinates)
         {
-            throw new System.NotImplementedException();
+            //Если игра начата, то сделать выстрел
+            //Если игра не начата бросить ошибку
+            game.Player1Shot(coordinates);
         }
     }
 }

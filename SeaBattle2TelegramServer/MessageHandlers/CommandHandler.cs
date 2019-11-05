@@ -18,13 +18,13 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     return;
                 case StartNewGameCommand:
                     
-                    int width = 0;
-                    int height = 0;
+                    int width = 10;
+                    int height = 10;
                     //TODO попытка прочитать размеры полей в параметрах
                     session.RecreateGame(width, height);
                     bot.SendTextMessageAsync(message.From.Id, "Игра началась! Для выстрела просто отправьте два числа(координаты поля противника)");
 
-//                    SendPlaygrounds(message, session);
+                    Stub.SendPlayground(message, session, bot);
 
                     return;
                 case "/end_game":
