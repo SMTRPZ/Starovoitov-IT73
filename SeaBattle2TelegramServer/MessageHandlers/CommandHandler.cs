@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using SeaBattle2Lib;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace SeaBattle2TelegramServer.MessageHandlers
@@ -12,42 +13,31 @@ namespace SeaBattle2TelegramServer.MessageHandlers
 
             switch (text)
             {
-                case "/start":
+                case StartInteractingWithBotCommand:
                     bot.SendTextMessageAsync(message.From.Id, 
                         $"Привет! Давай сыграем в \"Морской Бой\". Для старта игры отправь мне команду  {StartNewGameCommand}");
                     return;
                 case StartNewGameCommand:
-                    
                     int width = 10;
                     int height = 10;
-                    //TODO попытка прочитать размеры полей в параметрах
                     session.RecreateGame(width, height);
-                    bot.SendTextMessageAsync(message.From.Id, "Игра началась! Для выстрела просто отправьте два числа(координаты поля противника)");
-
-                    Stub.SendPlayground(message, session, bot);
-
+                    bot.SendTextMessageAsync(message.From.Id, "Игра началась! Для выстрела просто отправьте два числа (координаты поля противника)");
+                    session.SendPlayground(message, bot);
                     return;
                 case "/end_game":
-                    
-                    bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
-                    
-//                    if (session.TryEndGame())
-//                        bot.SendTextMessageAsync(message.From.Id, "Игра закончена");
-//                    else
-//                        bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
 
+                    if (session.TryEndGame())
+                        bot.SendTextMessageAsync(message.From.Id, "Игра закончена");
+                    else
+                        bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
                     return;
                 case "/auto_shot":
-//                    (int x, int y) = session.PlayerAutoShot();
-//                    PlayerShot(x,y,session,message);
-//                    bot.SendTextMessageAsync(message.From.Id, $"Автоматический выстрел за игрока по координатам x:{x}, y:{y}.");
-//                    SendPlaygrounds(message,session);
-
-                    bot.SendTextMessageAsync(message.From.Id, "Я пока так не умею");
+                    var coordinates = session.PlayerAutoShot();
+                    bot.SendTextMessageAsync(message.From.Id, $"Автоматический выстрел за игрока по координатам x:{coordinates.X}, y:{coordinates.Y}.");
+                    session.SendPlayground(message, bot);
                     return;
-                case "/show_playground":
-//                    SendPlaygrounds(message, session);
-                    bot.SendTextMessageAsync(message.From.Id, "Я пока так не умею");
+                case ShowPlaygroundCommand:
+                    session.SendPlayground(message, bot);
                     return;
             }
 

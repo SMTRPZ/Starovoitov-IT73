@@ -31,7 +31,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         session.ShootingForThePlayer(coordinates);
                         try
                         {
-                            Stub.SendPlayground(message, session, bot);
+                            session.SendPlayground(message, bot);
                         }
                         catch (Exception e)
                         {

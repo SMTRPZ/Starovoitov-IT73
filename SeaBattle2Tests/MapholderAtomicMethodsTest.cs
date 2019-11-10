@@ -1,7 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBattle2Lib;
-
+/*
+ * Проверка атомарной функции проверки замещённой площади
+ * Проверка функции, которая определяет максимальную длинну корабля по площади
+ * Проверка функции, которая возвращает замещённую площадь по длинне максимального корабля
+ * Проверка совместной работы всех трёх функций
+ * Получаем по размеру карты площадь, которая будет замещена
+ * Генерация слоёв по разным размерам с кораблями с проверкой длины корабля
+ */
 namespace SeaBattle2Tests
 {
     [TestClass]
@@ -15,7 +22,7 @@ namespace SeaBattle2Tests
         public void IsAreaLimitIsNotExceeded_1(int countOfFilledCells)
         {
             //Act
-            bool isAreaLimitIsNotExceeded = Mapholder.IsAreaLimitIsNotExceeded(2, 500, 0.2);
+            bool isAreaLimitIsNotExceeded = Mapholder.IsAreaLimitIsNotExceeded(countOfFilledCells, 500, 0.2);
 
             //Assert
             Assert.IsTrue(isAreaLimitIsNotExceeded);

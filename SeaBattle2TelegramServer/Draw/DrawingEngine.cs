@@ -107,18 +107,16 @@ namespace SeaBattle2TelegramServer.Draw
                     
                     for (int xCoord = xCoordinate; xCoord < xCoordinate + 10 * (cellSize+lineSize) ;xCoord+=cellSize+lineSize)
                     {
-                        index++;
                         graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoord, yCoordinate, drawFormat);
+                        index++;
                     }
 
-                    index = 11;
+                    index = 10;
                     for (int yCoord = yCoordinate-10*(cellSize+lineSize); yCoord < yCoordinate; yCoord+=(cellSize+lineSize))
                     {
                         index--;
                         graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoordinate-cellSize,yCoord, drawFormat);
                     }
-
-
                 }
             }
             

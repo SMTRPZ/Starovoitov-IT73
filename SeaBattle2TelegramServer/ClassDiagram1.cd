@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SeaBattle2TelegramServer.MessageHandlers.MessageHandler" Collapsed="true">
-    <Position X="3.75" Y="4" Width="1.5" />
+    <Position X="4" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>MessageHandlers\MessageHandler.cs</FileName>
@@ -54,7 +54,7 @@
   <Class Name="SeaBattle2TelegramServer.TelegramSession">
     <Position X="2" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACAACAAIAIAAAEAAAAAgAAAAAoAAAAAAAAAAA=</HashCode>
       <FileName>TelegramSession.cs</FileName>
     </TypeIdentifier>
   </Class>
