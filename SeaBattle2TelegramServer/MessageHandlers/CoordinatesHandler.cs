@@ -27,6 +27,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     try
                     {
                         session.ShootingForThePlayer(coordinates);
+                        session.ComputerShot();
                         try
                         {
                             session.SendPlayground(message, bot);

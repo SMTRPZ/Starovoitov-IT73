@@ -1,23 +1,21 @@
-﻿using Newtonsoft.Json.Serialization;
-using SeaBattle2TelegramServer.MessageHandlers;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace SeaBattle2TelegramServer
+namespace SeaBattle2TelegramServer.MessageHandlers
 {
     internal class MessageСonveyor:MessageHandler
     {
-        private MessageHandler firstHandler;
+        private MessageHandler _firstHandler;
 
         public void AddHandler(MessageHandler messageHandler)
         {
-            if (firstHandler == null)
+            if (_firstHandler == null)
             {
-                firstHandler = messageHandler;
+                _firstHandler = messageHandler;
                 return;
             }
             
-            var currentHandler = firstHandler;
+            var currentHandler = _firstHandler;
             while (currentHandler.Successor!=null)
             {
                 currentHandler = currentHandler.Successor;
@@ -29,7 +27,7 @@ namespace SeaBattle2TelegramServer
 
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
         {
-            firstHandler.HandleMessage(message,session,bot);
+            _firstHandler.HandleMessage(message,session,bot);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SeaBattle2Lib.Shooting
         };
         
         
-        public static Coordinates MakeShot(ref Map map, Random random)
+        public static Coordinates MakeShot(ref Map map, Random random=null)
         {
             if(!map.IsValid())
                 throw new InvalidMapException();

@@ -1,12 +1,13 @@
 ﻿using System;
 using SeaBattle2Lib.Exceptions;
+using SeaBattle2Lib.Shooting;
 
 namespace SeaBattle2Lib.GameLogic
 {
     public class Game
     {
-        public Map Player1Map { get; private set; }
-        public Map Player2Map { get; private set; }
+        public Map Player1Map;
+        public Map Player2Map;
 
         public bool GameIsOn { get; private set; }
         private bool _firstPlayerHasToShoot;
@@ -76,8 +77,7 @@ namespace SeaBattle2Lib.GameLogic
 
         public Coordinates Player1AutoShot()
         {
-            //TODO вызвать AI
-            var coordinates = new Coordinates(1, 5);
+            var coordinates = Ai.MakeShot(ref Player2Map);
             Player1Shot(coordinates);
             return coordinates;
         }

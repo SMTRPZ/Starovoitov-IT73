@@ -30,14 +30,10 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
                     return;
                 case "/game_status":
-                    if (session.Game!=null&&session.Game.GameIsOn)
-                    {
+                    if (session.Game != null && session.Game.GameIsOn)
                         bot.SendTextMessageAsync(message.From.Id, "Игра идёт");
-                    }
                     else
-                    {
                         bot.SendTextMessageAsync(message.From.Id, "Игра не идёт");
-                    }
                     return;
                 case "/auto_shot":
                     var coordinates = session.PlayerAutoShot();

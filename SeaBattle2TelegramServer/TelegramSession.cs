@@ -63,5 +63,10 @@ namespace SeaBattle2TelegramServer
                 bot.SendTextMessageAsync(message.From.Id, "Игра ещё не началась");
             }
         }
+
+        public void ComputerShot()
+        {
+            Game.Player2AutoShot();
+        }
     }
 }
