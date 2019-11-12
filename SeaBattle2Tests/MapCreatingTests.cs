@@ -1,12 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBattle2Lib;
 using System;
+using SeaBattle2Lib.Exceptions;
+using SeaBattle2Lib.GameLogic;
 
-/*
-Создать карту и проверить её размер +
-Создать карту с неадекватными параментами должно упасть +
-Карта поддерживает любой прямоугольный размер +
- */
 namespace SeaBattle2Tests
 {
     [TestClass]
@@ -50,56 +47,28 @@ namespace SeaBattle2Tests
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize1()
         {
-            try
+
+            Assert.ThrowsException<InvalidMapSizeException>(() =>
             {
                 Map map = new Map(-10, -5);
-                Assert.Fail();
-            }catch(InvalidMapSizeException e)
-            {
-
-            }catch(Exception e1)
-            {
-                Assert.Fail();
-            }
-
+            });
+            
         }
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize2()
         {
-            try
+            Assert.ThrowsException<InvalidMapSizeException>(() =>
             {
                 Map map = new Map(-10, 5);
-                Assert.Fail();
-            }
-            catch (InvalidMapSizeException e)
-            {
-
-            }
-            catch (Exception e1)
-            {
-                Assert.Fail();
-            }
-
-        }
+            });
+         }
         [TestMethod]
         public void MapCanOnlyBeCreatedWithAPositiveSize3()
         {
-            try
+            Assert.ThrowsException<InvalidMapSizeException>(() =>
             {
                 Map map = new Map(10, -5);
-                Assert.Fail();
-            }
-            catch (InvalidMapSizeException e)
-            {
-
-            }
-            catch (Exception e1)
-            {
-                Assert.Fail();
-            }
-
+            });
         }
-
-     
     }
 }

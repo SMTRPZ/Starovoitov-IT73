@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using SeaBattle2Lib;
+using SeaBattle2Lib.GameLogic;
 using SeaBattle2TelegramServer.Draw;
 using Telegram.Bot;
 using Telegram.Bot.Types;

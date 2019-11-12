@@ -1,4 +1,6 @@
-﻿namespace SeaBattle2Lib
+﻿using SeaBattle2Lib.GameLogic;
+
+namespace SeaBattle2Lib
 {
     public struct MapLayer
     {

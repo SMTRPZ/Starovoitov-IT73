@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using SeaBattle2TelegramServer.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Args;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-
-
 
 namespace SeaBattle2TelegramServer
 {
     class TelegramNegotiator
     {
-        const string BotToken = "909771267:AAHfdJ5NN2efYFRFEzAaQFar757qQwSwlrA";
         TelegramBotClient _bot;
-        private static readonly Dictionary<int, TelegramSession> Sessions = new Dictionary<int, TelegramSession>();
-        private MessageHandler Handler;
+        readonly SessionsStore _sessionsStore = new SessionsStore();
+        readonly MessageСonveyor _messageСonveyor = new MessageСonveyor();
         
-        MessageСonveyor _messageСonveyor =new MessageСonveyor(); 
-        public void StartConversation()
+        public void StartConversation(string botToken )
         {
             //Настройка конвеера обработки сообщений
             //Фильтровать текст по командам
@@ -29,9 +23,8 @@ namespace SeaBattle2TelegramServer
             //Непонятно что пришло
             _messageСonveyor.AddHandler(new IncomprehensibleMessageHandler());
             
-            
             //Запуск бота
-            _bot = new TelegramBotClient(BotToken);
+            _bot = new TelegramBotClient(botToken);
             _bot.OnMessage += OnMessage;
             _bot.StartReceiving(new List<UpdateType>
             {
@@ -45,8 +38,7 @@ namespace SeaBattle2TelegramServer
             try
             {
                 Console.WriteLine($"Пришло сообщение {e.Message.Text}");
-                TelegramSession currentSession = GetTelegramSession(message);
-
+                TelegramSession currentSession = _sessionsStore.GetTelegramSession(message);
                 _messageСonveyor.HandleMessage(message, currentSession, _bot);
             }
             catch (Exception eee)
@@ -54,19 +46,6 @@ namespace SeaBattle2TelegramServer
                 _bot.SendTextMessageAsync(message.From.Id, $"Я навернулся. Ошибка: {eee.Message}");
             }
         }
-
-        private TelegramSession GetTelegramSession(Message message)
-        {
-            TelegramSession currentSession;
-            if ((currentSession = Sessions.GetValueOrDefault(message.From.Id) )== null)
-            {
-                currentSession = new TelegramSession();
-                Sessions.Add(message.From.Id, currentSession);
-            }
-
-            return currentSession;
-        }
-        
     }
 }
 

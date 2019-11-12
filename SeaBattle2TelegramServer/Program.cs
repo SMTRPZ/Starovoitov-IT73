@@ -6,7 +6,8 @@ namespace SeaBattle2TelegramServer
     {
         static void Main(string[] args)
         {
-            new TelegramNegotiator().StartConversation();
+            string botToken = "909771267:AAHfdJ5NN2efYFRFEzAaQFar757qQwSwlrA";
+            new TelegramNegotiator().StartConversation(botToken);
             Task.Delay(int.MaxValue).Wait();
         }
     }

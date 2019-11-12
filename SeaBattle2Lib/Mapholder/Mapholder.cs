@@ -6,6 +6,8 @@ using System.Diagnostics.SymbolStore;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading;
+using SeaBattle2Lib.Exceptions;
+using SeaBattle2Lib.GameLogic;
 
 namespace SeaBattle2Lib
 {

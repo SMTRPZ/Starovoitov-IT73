@@ -3,16 +3,11 @@ using SeaBattle2Lib.GameLogic;
 
 namespace SeaBattle2Lib.Shooting
 {
-    public class RandomShooting : ShootingMethod
+    public class WtfShooting : ShootingMethod
     {
-        public override bool ConditionsAreMet(ref Map map)
+        protected override Coordinates Shot(ref Map map, Random random1)
         {
-            return GetCountOfDamagedParts(ref map) == 0 && HasAFreeCell(ref map);
-        }
-        protected override Coordinates Shot(ref Map map, Random random)
-        {
-            if (random == null) random = new Random();
-
+            Random random = new Random();
             while (true)
             {
                 int x = random.Next(map.Width);
@@ -23,6 +18,11 @@ namespace SeaBattle2Lib.Shooting
                     return new Coordinates(x,y);
                 }
             }
+        }
+
+        public override bool ConditionsAreMet(ref Map map)
+        {
+            return HasAFreeCell(ref map);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeaBattle2Lib
+namespace SeaBattle2Lib.Exceptions
 {
     public class TryingToCrossMapsOfDifferentSizesException:Exception
     {

@@ -18,9 +18,13 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="ClassDiagram1.cd" t="Include" />
         <e p="Exceptions" t="Include">
+          <e p="FailedToMakeAShotException.cs" t="Include" />
+          <e p="InvalidMapException.cs" t="Include" />
           <e p="InvalidMapSizeException.cs" t="Include" />
+          <e p="TooFewDamagedPartsException.cs" t="Include" />
           <e p="TotalZrada.cs" t="Include" />
           <e p="TryingToCrossMapsOfDifferentSizesException.cs" t="Include" />
+          <e p="WrongDamagedPartsLocationException.cs" t="Include" />
         </e>
         <e p="GameLogic" t="Include">
           <e p="CellStatus.cs" t="Include" />
@@ -47,6 +51,7 @@
           <e p="RandomShooting.cs" t="Include" />
           <e p="ShootingMethod.cs" t="Include" />
           <e p="ShotAlong.cs" t="Include" />
+          <e p="WtfShooting.cs" t="Include" />
         </e>
       </e>
       <e p="SeaBattle2TelegramServer" t="IncludeRecursive">
@@ -72,15 +77,19 @@
         </e>
         <e p="Program.cs" t="Include" />
         <e p="SeaBattle2TelegramServer.csproj" t="IncludeRecursive" />
+        <e p="SessionsStore.cs" t="Include" />
         <e p="TelegramNegotiator.cs" t="Include" />
         <e p="TelegramSession.cs" t="Include" />
       </e>
       <e p="SeaBattle2Tests" t="IncludeRecursive">
-        <e p="AITests.cs" t="Include" />
+        <e p="AiAlongShooting.cs" t="Include" />
+        <e p="AiCrossfireShooting.cs" t="Include" />
+        <e p="AiRandomShooting.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="ConditionsForShootingMethodsTests.cs" t="Include" />
         <e p="MapCreatingTests.cs" t="Include" />
-        <e p="MapholderAtomicMethodsTest.cs" t="Include" />
         <e p="MapholderTests.cs" t="Include" />
+        <e p="MapValidationTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">
@@ -88,9 +97,7 @@
             </e>
           </e>
         </e>
-        <e p="readme.txt" t="Include" />
         <e p="SeaBattle2Tests.csproj" t="IncludeRecursive" />
-        <e p="StupidMapholderTests.cs" t="Include" />
       </e>
     </e>
   </component>

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using SeaBattle2Lib;
+using SeaBattle2Lib.GameLogic;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -58,11 +59,6 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 return;
             }
             Successor?.HandleMessage(message,session,bot);
-            
-            
         }
-        
-        
-        
     }
 }

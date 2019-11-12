@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SeaBattle2Lib
+﻿namespace SeaBattle2Lib.GameLogic
 {
     public struct Coordinates
     {
@@ -47,6 +43,11 @@ namespace SeaBattle2Lib
         public static bool operator !=(Coordinates left, Coordinates right)
         {
             return !(left == right);
+        }
+
+        public override string ToString()
+        {
+            return $"x = {X}, y = {Y}";
         }
     }
 }
