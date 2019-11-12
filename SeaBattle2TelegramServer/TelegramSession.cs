@@ -29,7 +29,7 @@ namespace SeaBattle2TelegramServer
 
         public bool TryEndGame()
         {
-            if (Game!=null&&Game.GameIsOn)
+            if (Game!=null && Game.GameIsOn)
             {
                 Game.EndGame();
                 return true;
