@@ -8,8 +8,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
     {
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
         {
-            string text = message?.Text;
-            text = text?.Trim();
+            string text = message?.Text?.Trim();
 
             switch (text)
             {
@@ -25,11 +24,20 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     session.SendPlayground(message, bot);
                     return;
                 case "/end_game":
-
                     if (session.TryEndGame())
                         bot.SendTextMessageAsync(message.From.Id, "Игра закончена");
                     else
                         bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
+                    return;
+                case "/game_status":
+                    if (session.Game!=null&&session.Game.GameIsOn)
+                    {
+                        bot.SendTextMessageAsync(message.From.Id, "Игра идёт");
+                    }
+                    else
+                    {
+                        bot.SendTextMessageAsync(message.From.Id, "Игра не идёт");
+                    }
                     return;
                 case "/auto_shot":
                     var coordinates = session.PlayerAutoShot();
@@ -42,9 +50,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
             }
 
             Successor?.HandleMessage(message, session, bot);
-
         }
-        
         
         private const string StartInteractingWithBotCommand = "/start";
         private const string StartNewGameCommand = "/start_new_game";

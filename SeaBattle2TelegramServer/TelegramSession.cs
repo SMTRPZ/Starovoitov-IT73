@@ -12,46 +12,39 @@ namespace SeaBattle2TelegramServer
 {
     public class TelegramSession
     {
-        private Game game;
-        private bool GameIsOn = false;
-
-        public Game GetGameCopy()
-        {
-            return game;
-        }
-
+        public Game Game { get; private set; }
+        
         public void RecreateGame(int width, int height)
         {
-            game = new Game(width, height);
-            GameIsOn = true;
+            Game = new Game(width, height);
         }
 
         public void ShootingForThePlayer(Coordinates coordinates)
         {
-            //Если игра начата, то сделать выстрел
-            //Если игра не начата бросить ошибку
-            game.Player1Shot(coordinates);
+            if (Game.GameIsOn)
+                Game.Player1Shot(coordinates);
+            else
+                throw new Exception("Игра не начата. Куда ты стреляешь?");
         }
 
         public bool TryEndGame()
         {
-            if (!GameIsOn)
+            if (Game!=null&&Game.GameIsOn)
             {
-                GameIsOn = false;
+                Game.EndGame();
                 return true;
             }
-
             return false;
         }
 
         public Coordinates PlayerAutoShot()
         {
-            return game.Player1AutoShot();
+            return Game.Player1AutoShot();
         }
         
         public void SendPlayground(Message message, TelegramBotClient bot)
         {
-            if (GameIsOn)
+            if (Game!=null&&Game.GameIsOn)
             {
                 try
                 {
@@ -69,8 +62,6 @@ namespace SeaBattle2TelegramServer
             {
                 bot.SendTextMessageAsync(message.From.Id, "Игра ещё не началась");
             }
-           
-            
         }
     }
 }

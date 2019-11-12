@@ -21,6 +21,7 @@
           <e p="FailedToMakeAShotException.cs" t="Include" />
           <e p="InvalidMapException.cs" t="Include" />
           <e p="InvalidMapSizeException.cs" t="Include" />
+          <e p="OtherPlayerMustShootException.cs" t="Include" />
           <e p="TooFewDamagedPartsException.cs" t="Include" />
           <e p="TotalZrada.cs" t="Include" />
           <e p="TryingToCrossMapsOfDifferentSizesException.cs" t="Include" />

@@ -1,14 +1,20 @@
 ﻿using System;
+using SeaBattle2Lib.Exceptions;
 
 namespace SeaBattle2Lib.GameLogic
 {
-    public struct Game
+    public class Game
     {
         public Map Player1Map { get; private set; }
         public Map Player2Map { get; private set; }
 
+        public bool GameIsOn { get; private set; }
+        private bool _firstPlayerHasToShoot;
+        
         public Game(int mapWidth, int mapHeight)
         {
+            GameIsOn = true;
+            _firstPlayerHasToShoot = true;
             Player1Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             Player2Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
         }
@@ -16,12 +22,24 @@ namespace SeaBattle2Lib.GameLogic
 
         public void Player1Shot(Coordinates coordinates)
         {
-            PlayerShot(1, coordinates);
+            if (_firstPlayerHasToShoot)
+            {
+                PlayerShot(1, coordinates);
+                _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
+            }
+            else
+                throw new OtherPlayerMustShootException();
         }
 
         public void Player2Shot(Coordinates coordinates)
         {
-            PlayerShot(2, coordinates);
+            if (!_firstPlayerHasToShoot)
+            {
+                PlayerShot(2, coordinates);
+                _firstPlayerHasToShoot = !_firstPlayerHasToShoot; 
+            }
+            else
+                throw new OtherPlayerMustShootException();
         }
 
         private void PlayerShot(int playerNumber, Coordinates coordinates)
@@ -69,6 +87,14 @@ namespace SeaBattle2Lib.GameLogic
             var coordinates = new Coordinates(1, 2);
             Player2Shot(coordinates);
             return coordinates;
+        }
+
+        public void EndGame()
+        {
+            if (GameIsOn)
+                GameIsOn = false;
+            else
+                throw new Exception("Игра уже остановлена");
         }
     }
 }

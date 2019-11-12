@@ -17,7 +17,7 @@ namespace SeaBattle2Tests
             {
                 Map map = new Map(15, 65);
             }
-            catch (Exception e)
+            catch
             {
                 Assert.Fail();
             }

@@ -8,9 +8,6 @@ using Telegram.Bot.Types;
 
 namespace SeaBattle2TelegramServer.MessageHandlers
 {
-    /// <summary>
-    /// Блокирует сообщение, если в нём есть текст
-    /// </summary>
     public class CoordinatesHandler:MessageHandler
     {
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
@@ -42,7 +39,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     }
                     catch (ArgumentOutOfRangeException argumentOutOfRangeException)
                     {
-                        bot.SendTextMessageAsync(message.From.Id, $"Неверные координаты. Вы можете стрелять только в диапазоне  (0-{session.GetGameCopy().Player2Map.Width-1}) (0-{session.GetGameCopy().Player2Map.Height-1})");
+                        bot.SendTextMessageAsync(message.From.Id, $"Неверные координаты. Вы можете стрелять только в диапазоне  (0-{session.Game.Player2Map.Width-1}) (0-{session.Game.Player2Map.Height-1})");
                     }
                     catch (Exception e)
                     {

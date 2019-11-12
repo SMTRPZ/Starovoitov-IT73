@@ -13,7 +13,7 @@ namespace SeaBattle2TelegramServer.Draw
         private static int _fileCounter = 1;
         public static FileStream GetPlaygrounds(TelegramSession session)
         {
-            var game = session.GetGameCopy();
+            var game = session.Game;
 
             if (game.Player1Map.Width != 10 || game.Player1Map.Height != 10 || game.Player2Map.Width != 10 ||game.Player2Map.Height != 10)
                 throw new NotImplementedException("Невозможно отрисовать карту, кроме размера 10 на 10");
