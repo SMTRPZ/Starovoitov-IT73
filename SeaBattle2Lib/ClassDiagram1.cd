@@ -1,38 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="SeaBattle2Lib.AI">
-    <Position X="2" Y="5" Width="3.25" />
+  <Class Name="SeaBattle2Lib.Shooting.Ai">
+    <Position X="1" Y="6.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkA=</HashCode>
       <FileName>Shooting\AI.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="Methods" />
+    </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="SeaBattle2Lib.RandomShooting">
-    <Position X="1" Y="8.75" Width="1.5" />
+  <Class Name="SeaBattle2Lib.Shooting.RandomShooting">
+    <Position X="0.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shooting\RandomShooting.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SeaBattle2Lib.CrossfireShooting">
-    <Position X="3.25" Y="8.75" Width="1.5" />
+  <Class Name="SeaBattle2Lib.Shooting.ShotAlong">
+    <Position X="4.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shooting\CrossfireShooting.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SeaBattle2Lib.ShotAlong">
-    <Position X="5.25" Y="8.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shooting\ShotAlong.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SeaBattle2Lib.ShootingMethod" Collapsed="true">
-    <Position X="3" Y="7" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Shooting\ShootingMethod.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SeaBattle2Lib.Mapholder">
@@ -42,27 +31,48 @@
       <FileName>Mapholder\Mapholder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="SeaBattle2Lib.Map">
+  <Class Name="SeaBattle2Lib.Shooting.CrossfireShooting">
+    <Position X="2.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Shooting\CrossfireShooting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.Shooting.WtfShooting">
+    <Position X="6" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shooting\WtfShooting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeaBattle2Lib.Shooting.ShootingMethod" Collapsed="true">
+    <Position X="5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAgAAKAAAAAAAAAAIAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Shooting\ShootingMethod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="SeaBattle2Lib.GameLogic.Map">
     <Position X="6.25" Y="1.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAhAAAAAAAgAAAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <HashCode>AAAAAABAhAAAAAAAgAgAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>GameLogic\Map.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="CellsStatuses" />
     </ShowAsCollectionAssociation>
   </Struct>
-  <Struct Name="SeaBattle2Lib.Coordinates">
+  <Struct Name="SeaBattle2Lib.GameLogic.Coordinates">
     <Position X="2.5" Y="10.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
       <FileName>GameLogic\Coordinates.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="SeaBattle2Lib.GameLogic.Game">
     <Position X="1.25" Y="1.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAEIAAICBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGA=</HashCode>
+      <HashCode>AAEMAAICBAAAAIAAAAAAAAAAAAAAAIAAgAAAAAAQBGA=</HashCode>
       <FileName>GameLogic\Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

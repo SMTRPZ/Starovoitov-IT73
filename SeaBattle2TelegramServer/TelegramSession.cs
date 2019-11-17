@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using SeaBattle2Lib;
 using SeaBattle2Lib.GameLogic;
 using SeaBattle2TelegramServer.Draw;
 using Telegram.Bot;
@@ -12,39 +10,52 @@ namespace SeaBattle2TelegramServer
 {
     public class TelegramSession
     {
-        public Game Game { get; private set; }
-        
-        public void RecreateGame(int width, int height)
+        public Game Game => _game;
+        private Game _game;
+
+        int gamerTelegramId;
+
+        public TelegramSession(int gamerTelegramId)
         {
-            Game = new Game(width, height);
+            _game = new Game();
+            this.gamerTelegramId = gamerTelegramId;
         }
 
-        public void ShootingForThePlayer(Coordinates coordinates)
+        public void RecreateGame(int width, int height)
         {
-            if (Game.GameIsOn)
-                Game.Player1Shot(coordinates);
+            _game = new Game(width, height);
+        }
+
+        public bool ShootingForThePlayer(Coordinates coordinates)
+        {
+            if (_game.GameIsOn)
+                return _game.Player1Shot(coordinates);
             else
                 throw new Exception("Игра не начата. Куда ты стреляешь?");
         }
-
+        public Coordinates PlayerAutoShot()
+        {
+            return _game.Player1AutoShot();
+        }
+        public bool ComputerShot()
+        {
+            return _game.Player2AutoShot();
+        }
         public bool TryEndGame()
         {
-            if (Game!=null && Game.GameIsOn)
+            if (_game.GameIsOn)
             {
-                Game.EndGame();
+                _game.EndGame();
                 return true;
             }
             return false;
         }
 
-        public Coordinates PlayerAutoShot()
-        {
-            return Game.Player1AutoShot();
-        }
+      
         
         public void SendPlayground(Message message, TelegramBotClient bot)
         {
-            if (Game!=null&&Game.GameIsOn)
+            if (_game.GameIsOn)
             {
                 try
                 {
@@ -64,9 +75,15 @@ namespace SeaBattle2TelegramServer
             }
         }
 
-        public void ComputerShot()
+     
+        public void SendWinMessage(TelegramBotClient bot)
         {
-            Game.Player2AutoShot();
+            bot.SendTextMessageAsync(gamerTelegramId, "Вы выиграли");
+        }
+
+        public void SendLoseMessage(TelegramBotClient bot)
+        {
+            bot.SendTextMessageAsync(gamerTelegramId, "Вы проиграли");
         }
     }
 }

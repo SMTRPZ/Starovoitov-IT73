@@ -30,13 +30,18 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
                     return;
                 case "/game_status":
-                    if (session.Game != null && session.Game.GameIsOn)
+                    if (session.Game.GameIsOn)
                         bot.SendTextMessageAsync(message.From.Id, "Игра идёт");
                     else
                         bot.SendTextMessageAsync(message.From.Id, "Игра не идёт");
                     return;
                 case "/auto_shot":
+                    if(!session.Game.GameIsOn){
+                        bot.SendTextMessageAsync(message.From.Id, $"Игра ещё не началась. соре");
+                        return;
+                    }
                     var coordinates = session.PlayerAutoShot();
+                    session.ComputerShot();
                     bot.SendTextMessageAsync(message.From.Id, $"Автоматический выстрел за игрока по координатам x:{coordinates.X}, y:{coordinates.Y}.");
                     session.SendPlayground(message, bot);
                     return;
@@ -48,10 +53,8 @@ namespace SeaBattle2TelegramServer.MessageHandlers
             Successor?.HandleMessage(message, session, bot);
         }
         
-        private const string StartInteractingWithBotCommand = "/start";
         private const string StartNewGameCommand = "/start_new_game";
         private const string ShowPlaygroundCommand = "/show_playground";
-     
-          
+        private const string StartInteractingWithBotCommand = "/start";
     }
 }

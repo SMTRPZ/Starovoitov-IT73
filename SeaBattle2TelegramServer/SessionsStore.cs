@@ -11,7 +11,7 @@ namespace SeaBattle2TelegramServer
             TelegramSession currentSession;
             if ((currentSession = Sessions.GetValueOrDefault(message.From.Id) )== null)
             {
-                currentSession = new TelegramSession();
+                currentSession = new TelegramSession(message.From.Id);
                 Sessions.Add(message.From.Id, currentSession);
             }
 

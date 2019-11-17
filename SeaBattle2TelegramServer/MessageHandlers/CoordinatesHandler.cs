@@ -11,7 +11,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
     public class CoordinatesHandler:MessageHandler
     {
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
-        {
+        {            
             //попытаться распознать координаты и сделать выстрел
             if (message.Text != null)
             {
@@ -22,20 +22,30 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 
                 //два числа в строке
                 if (shotCoordinates.Length == 2)
-                { 
+                {
+                    if (!session.Game.GameIsOn)
+                    {
+                        bot.SendTextMessageAsync(message.From.Id, "Игра ещё не началась. Не могу принять координаты");
+                        return;
+                    }
                     Coordinates coordinates = new Coordinates(shotCoordinates[0], shotCoordinates[1]);
                     try
                     {
-                        session.ShootingForThePlayer(coordinates);
-                        session.ComputerShot();
+                        bool playerWin = session.ShootingForThePlayer(coordinates);
+                        if (playerWin)
+                            session.SendWinMessage(bot);
+
+                        bool computerWin = session.ComputerShot();
+                        if (computerWin)
+                            session.SendLoseMessage(bot);
+
                         try
                         {
                             session.SendPlayground(message, bot);
                         }
                         catch (Exception e)
                         {
-                            bot.SendTextMessageAsync(message.From.Id,
-                                $"Не удалось отправить акртинку поля боя. {e.Message}");
+                            bot.SendTextMessageAsync(message.From.Id, $"Не удалось отправить картинку поля боя. {e.Message}");
                         }
                     }
                     catch (ArgumentOutOfRangeException argumentOutOfRangeException)
@@ -47,14 +57,12 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         bot.SendTextMessageAsync(message.From.Id, $"Не удалось сделать выстрел. Причина: {e.Message}");
                     }
 
-                   
+                    return;
                 }
                 else
                 {
-                    //Какого хера тут не два числа?
-                    bot.SendTextMessageAsync(message.From.Id, "Сударь, мне нужно два чила, чтобы сделать выстрел.");
-                }    
-                return;
+                    bot.SendTextMessageAsync(message.From.Id, "Это не два числа");
+                }                    
             }
             Successor?.HandleMessage(message,session,bot);
         }
