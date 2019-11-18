@@ -9,6 +9,7 @@ namespace SeaBattle2Lib.Shooting
         protected override Coordinates Shot(ref Map map, Random random=null)
         {
             if (random == null) random = new Random();
+            Console.WriteLine("CrossfireShooting");
             
             Coordinates damagedPartOfShip = GetSingleDamagedPartOfShipCoordinates(ref map);
             List<Coordinates> possibleHitCoordinates = new List<Coordinates>();

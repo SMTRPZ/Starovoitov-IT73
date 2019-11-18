@@ -12,30 +12,30 @@ namespace SeaBattle2TelegramServer.MessageHandlers
 
             switch (text)
             {
-                case StartInteractingWithBotCommand:
+                case BotCommands.StartInteractingWithBotCommand:
                     bot.SendTextMessageAsync(message.From.Id, 
-                        $"Привет! Давай сыграем в \"Морской Бой\". Для старта игры отправь мне команду  {StartNewGameCommand}");
+                        $"Привет! Давай сыграем в \"Морской Бой\". Для старта игры отправь мне команду  {BotCommands.StartNewGameCommand}");
                     return;
-                case StartNewGameCommand:
+                case BotCommands.StartNewGameCommand:
                     int width = 10;
                     int height = 10;
                     session.RecreateGame(width, height);
                     bot.SendTextMessageAsync(message.From.Id, "Игра началась! Для выстрела просто отправьте два числа (координаты поля противника)");
                     session.SendPlayground(message, bot);
                     return;
-                case "/end_game":
+                case BotCommands.EndGameCommand:
                     if (session.TryEndGame())
                         bot.SendTextMessageAsync(message.From.Id, "Игра закончена");
                     else
                         bot.SendTextMessageAsync(message.From.Id, "Игра не начиналась.");
                     return;
-                case "/game_status":
+                case BotCommands.GetGameStatusCommand:
                     if (session.Game.GameIsOn)
                         bot.SendTextMessageAsync(message.From.Id, "Игра идёт");
                     else
                         bot.SendTextMessageAsync(message.From.Id, "Игра не идёт");
                     return;
-                case "/auto_shot":
+                case BotCommands.AutoShotCommand:
                     if(!session.Game.GameIsOn){
                         bot.SendTextMessageAsync(message.From.Id, $"Игра ещё не началась. соре");
                         return;
@@ -45,7 +45,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     bot.SendTextMessageAsync(message.From.Id, $"Автоматический выстрел за игрока по координатам x:{coordinates.X}, y:{coordinates.Y}.");
                     session.SendPlayground(message, bot);
                     return;
-                case ShowPlaygroundCommand:
+                case BotCommands.ShowPlaygroundCommand:
                     session.SendPlayground(message, bot);
                     return;
             }
@@ -53,8 +53,6 @@ namespace SeaBattle2TelegramServer.MessageHandlers
             Successor?.HandleMessage(message, session, bot);
         }
         
-        private const string StartNewGameCommand = "/start_new_game";
-        private const string ShowPlaygroundCommand = "/show_playground";
-        private const string StartInteractingWithBotCommand = "/start";
+       
     }
 }

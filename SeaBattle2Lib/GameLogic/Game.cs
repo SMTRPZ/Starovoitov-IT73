@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Pipes;
 using SeaBattle2Lib.Exceptions;
+using SeaBattle2Lib.Experiments;
 using SeaBattle2Lib.Shooting;
 
 namespace SeaBattle2Lib.GameLogic
@@ -27,13 +28,13 @@ namespace SeaBattle2Lib.GameLogic
         }
 
 
-        public bool Player1Shot(Coordinates coordinates)
+        public ShotResult Player1Shot(Coordinates coordinates)
         {
             if (_firstPlayerHasToShoot)
             {
                 bool isWin = PlayerShot(1, coordinates);
                 _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
-                return isWin;
+                return new ShotResult(isWin, coordinates);
             }
             else
                 throw new OtherPlayerMustShootException("Player1Shot");
@@ -90,29 +91,37 @@ namespace SeaBattle2Lib.GameLogic
                 for (int y = 0; y < map.Height; y++)
                 {
                     if (map.CellsStatuses[x, y] == CellStatus.DamagedPartOfShip)
-                        damagedParts.Add(new Coordinates(x, y));
+                        map.CellsStatuses[x, y] = CellStatus.DestroyedShip;
                 }
             }
 
-            //Закрасить все подбитые части в убитые корабли
-
-            //Пройтись по всем "целым" и "подбитым" частям несколько раз, закрашивая части "уничтоженные" части рядом в "подтибые" части
-
-            //Пройтись по карте столько раз, чтобы она перестала меняться
 
             for (int x = 0; x < map.Width; x++)
             {
                 for (int y = 0; y < map.Height; y++)
                 {
-                    
-                    
-
-
+                    if (map.CellsStatuses[x, y] == CellStatus.PartOfShip)
+                    {
+                        TryRedraw(ref map, new Coordinates(x+1,y));
+                        TryRedraw(ref map, new Coordinates(x-1,y));
+                        TryRedraw(ref map, new Coordinates(x,y+1));
+                        TryRedraw(ref map, new Coordinates(x,y-1));
+                    }
                 }
             }
 
+
         }
 
+
+        private void TryRedraw(ref Map map, Coordinates coordinates)
+        {
+            if (!map.CoordinatesAllowed(coordinates))
+                return;
+
+            if (map.CellsStatuses[coordinates.X, coordinates.Y] == CellStatus.DestroyedShip)
+                map.CellsStatuses[coordinates.X, coordinates.Y] = CellStatus.DamagedPartOfShip;
+        }
         private bool IsWin(int playerNumber)
         {
             //Просмотреть карту, по которой стреляли
@@ -169,15 +178,17 @@ namespace SeaBattle2Lib.GameLogic
         
         public Coordinates Player1AutoShot()
         {
-            var coordinates = Ai.MakeShot(ref _player2Map);
+            var coordinates = NotAi.MakeShot(ref _player2Map);
             Player1Shot(coordinates);
             return coordinates;
         }
         
-        public bool Player2AutoShot()
+        public ShotResult Player2AutoShot()
         {
-            var coordinates = Ai.MakeShot(ref _player1Map);
-            return Player2Shot(coordinates);
+            var coordinates = NotAi.MakeShot(ref _player1Map);
+            Console.WriteLine($"Выстрел за компьютер по     координатам {coordinates}");
+            bool isThisPlayerWon = Player2Shot(coordinates);
+            return new ShotResult(isThisPlayerWon, coordinates);
         }
 
         public void EndGame()

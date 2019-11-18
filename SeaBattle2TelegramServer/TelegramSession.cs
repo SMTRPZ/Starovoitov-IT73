@@ -1,4 +1,5 @@
 ﻿using System;
+using SeaBattle2Lib.Experiments;
 using SeaBattle2Lib.GameLogic;
 using SeaBattle2TelegramServer.Draw;
 using Telegram.Bot;
@@ -26,7 +27,7 @@ namespace SeaBattle2TelegramServer
             _game = new Game(width, height);
         }
 
-        public bool ShootingForThePlayer(Coordinates coordinates)
+        public ShotResult ShootingForThePlayer(Coordinates coordinates)
         {
             if (_game.GameIsOn)
                 return _game.Player1Shot(coordinates);
@@ -37,7 +38,11 @@ namespace SeaBattle2TelegramServer
         {
             return _game.Player1AutoShot();
         }
-        public bool ComputerShot()
+//        public bool ComputerShot()
+//        {
+//            return _game.Player2AutoShot();
+//        }
+        public ShotResult ComputerShot()
         {
             return _game.Player2AutoShot();
         }

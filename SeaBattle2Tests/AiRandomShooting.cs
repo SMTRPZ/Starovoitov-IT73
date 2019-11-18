@@ -17,11 +17,11 @@ namespace SeaBattle2Tests
             Random random = new Random(314159);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
-            Assert.AreEqual(new Coordinates(3,9), shotCoordinates);
+            Assert.AreEqual(new Coordinates(3,4), shotCoordinates);
         }
         
         [TestMethod]
@@ -32,11 +32,11 @@ namespace SeaBattle2Tests
             Random random = new Random(314159265);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
-            Assert.AreEqual(new Coordinates(4,0), shotCoordinates );
+            Assert.AreEqual(new Coordinates(4,4), shotCoordinates );
         }
     }
 }

@@ -52,6 +52,17 @@ namespace SeaBattle2Lib
             var map = new Map(width, height);
 //            StupidFillOutTheMap(ref map);
             map.CellsStatuses[0, 0] = CellStatus.PartOfShip;
+            
+            map.CellsStatuses[5, 0] = CellStatus.PartOfShip;
+            
+            map.CellsStatuses[7, 0] = CellStatus.PartOfShip;
+            map.CellsStatuses[7, 1] = CellStatus.PartOfShip;
+            
+//            map.CellsStatuses[5, 1] = CellStatus.PartOfShip;
+//            map.CellsStatuses[5, 2] = CellStatus.PartOfShip;
+//            map.CellsStatuses[5, 3] = CellStatus.PartOfShip;
+//            map.CellsStatuses[5, 4] = CellStatus.PartOfShip;
+            
             return map;
         }
         private static bool CanInsertAShip(ref Map map, Coordinates coordinates)

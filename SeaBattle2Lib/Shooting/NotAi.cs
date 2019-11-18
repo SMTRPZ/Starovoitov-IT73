@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using SeaBattle2Lib.Exceptions;
 using SeaBattle2Lib.GameLogic;
 
 namespace SeaBattle2Lib.Shooting
 {
-    public static class Ai
+    public static class NotAi
     {
         private static readonly List<ShootingMethod> Methods=new List<ShootingMethod>
         {
@@ -17,14 +16,14 @@ namespace SeaBattle2Lib.Shooting
         };
         
         
-        public static Coordinates MakeShot(ref Map map, Random random=null)
+        public static Coordinates MakeShot(ref Map targetMap, Random random=null)
         {
-            if(!map.IsValid())
+            if(!targetMap.IsValid())
                 throw new InvalidMapException();
             
             foreach (var method in Methods)
             {
-                if (method.TryToShot(ref map, out Coordinates coordinates, random))
+                if (method.TryToShot(ref targetMap, out Coordinates coordinates, random))
                     return coordinates;
             }
             throw new FailedToMakeAShotException();

@@ -18,7 +18,7 @@ namespace SeaBattle2Tests
             Random random = new Random(314159);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
@@ -34,7 +34,7 @@ namespace SeaBattle2Tests
             Random random = new Random(316159);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
@@ -51,7 +51,7 @@ namespace SeaBattle2Tests
             Random random = new Random(31639);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
@@ -67,7 +67,7 @@ namespace SeaBattle2Tests
             Random random = new Random(3163999);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
@@ -84,7 +84,7 @@ namespace SeaBattle2Tests
             Random random = new Random(3163999);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert
@@ -100,7 +100,7 @@ namespace SeaBattle2Tests
             Random random = new Random(3169);
             
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             Console.WriteLine(shotCoordinates);
             
             //Assert

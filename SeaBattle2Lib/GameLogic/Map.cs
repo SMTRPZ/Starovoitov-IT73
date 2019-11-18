@@ -21,6 +21,20 @@ namespace SeaBattle2Lib.GameLogic
             CellsStatuses = new CellStatus[width, height];
         }
 
+        public bool CoordinatesAllowed(Coordinates coordinates)
+        {
+            int x = coordinates.X;
+            int y = coordinates.Y;
+
+            if (x < 0 || Width <= x)
+                return false;
+            
+            if (y < 0 || Height <= y)
+                return false;
+
+            return true;
+        }
+        
         public bool IsValid()
         {
             if (Width == 0 || Height == 0)

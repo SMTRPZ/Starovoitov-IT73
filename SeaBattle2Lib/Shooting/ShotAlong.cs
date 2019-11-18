@@ -11,6 +11,7 @@ namespace SeaBattle2Lib.Shooting
     {
         protected override Coordinates Shot(ref Map map, Random random=null)
         {
+            Console.WriteLine("ShotAlong");
             if (random == null)
                 random = new Random();
           

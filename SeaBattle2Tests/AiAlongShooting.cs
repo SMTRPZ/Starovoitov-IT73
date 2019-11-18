@@ -19,7 +19,7 @@ namespace SeaBattle2Tests
             map.CellsStatuses[0, 1] = CellStatus.DamagedPartOfShip;
             Random random = new Random();
             //Act
-            Coordinates shotCoordinates = Ai.MakeShot(ref map, random);
+            Coordinates shotCoordinates = NotAi.MakeShot(ref map, random);
             //Assert
             Assert.AreEqual(shotCoordinates, new Coordinates(0,2));
         }
@@ -103,9 +103,9 @@ namespace SeaBattle2Tests
         {
             //Arrange
             Map map = new Map(10,10);
-            map.CellsStatuses[5, 2] = CellStatus.DamagedPartOfShip;
-            map.CellsStatuses[5, 3] = CellStatus.DamagedPartOfShip;
             map.CellsStatuses[5, 4] = CellStatus.DestroyedShip;
+            map.CellsStatuses[5, 3] = CellStatus.DamagedPartOfShip;
+            map.CellsStatuses[5, 2] = CellStatus.DamagedPartOfShip;
             Random random = new Random(313541);
             //Act
             bool canShot = new ShotAlong().TryToShot(ref map, out Coordinates coordinates, random);

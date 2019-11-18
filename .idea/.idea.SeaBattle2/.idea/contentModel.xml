@@ -27,6 +27,10 @@
           <e p="TryingToCrossMapsOfDifferentSizesException.cs" t="Include" />
           <e p="WrongDamagedPartsLocationException.cs" t="Include" />
         </e>
+        <e p="Experiments" t="Include">
+          <e p="Result.cs" t="Include" />
+          <e p="ShotResult.cs" t="Include" />
+        </e>
         <e p="GameLogic" t="Include">
           <e p="CellStatus.cs" t="Include" />
           <e p="Coordinates.cs" t="Include" />
@@ -47,8 +51,8 @@
         </e>
         <e p="SeaBattle2Lib.csproj" t="IncludeRecursive" />
         <e p="Shooting" t="Include">
-          <e p="AI.cs" t="Include" />
           <e p="CrossfireShooting.cs" t="Include" />
+          <e p="NotAi.cs" t="Include" />
           <e p="RandomShooting.cs" t="Include" />
           <e p="ShootingMethod.cs" t="Include" />
           <e p="ShotAlong.cs" t="Include" />
@@ -63,6 +67,7 @@
           <e p="PlaygroundType.cs" t="Include" />
         </e>
         <e p="MessageHandlers" t="Include">
+          <e p="BotCommands.cs" t="Include" />
           <e p="CommandHandler.cs" t="Include" />
           <e p="CoordinatesHandler.cs" t="Include" />
           <e p="IncomprehensibleMessageHandler.cs" t="Include" />
@@ -88,6 +93,7 @@
         <e p="AiRandomShooting.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="ConditionsForShootingMethodsTests.cs" t="Include" />
+        <e p="GameTests.cs" t="Include" />
         <e p="MapCreatingTests.cs" t="Include" />
         <e p="MapholderTests.cs" t="Include" />
         <e p="MapValidationTests.cs" t="Include" />

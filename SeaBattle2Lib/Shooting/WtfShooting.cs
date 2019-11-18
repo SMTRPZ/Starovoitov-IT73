@@ -7,6 +7,7 @@ namespace SeaBattle2Lib.Shooting
     {
         protected override Coordinates Shot(ref Map map, Random random1)
         {
+            Console.WriteLine("WtfShooting");
             Random random = new Random();
             while (true)
             {
