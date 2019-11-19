@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Serialization;
 using SeaBattle2TelegramServer.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -35,6 +36,8 @@ namespace SeaBattle2TelegramServer
         private void OnMessage(object sender, MessageEventArgs e)
         {
             var message = e.Message;
+
+
             try
             {
                 Console.WriteLine($"Пришло сообщение {e.Message.Text}");

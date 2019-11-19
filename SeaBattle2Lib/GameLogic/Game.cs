@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using System.Runtime.CompilerServices;
 using SeaBattle2Lib.Exceptions;
 using SeaBattle2Lib.Experiments;
 using SeaBattle2Lib.Shooting;
@@ -17,7 +18,10 @@ namespace SeaBattle2Lib.GameLogic
         
         public bool GameIsOn { get; private set; }
         private bool _firstPlayerHasToShoot;
-        
+
+
+        public Player? Winner { get; private set; }
+
 
         public Game(int mapWidth, int mapHeight)
         {
@@ -25,6 +29,7 @@ namespace SeaBattle2Lib.GameLogic
             _firstPlayerHasToShoot = true;
             _player1Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             _player2Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
+            Winner = null;
         }
 
 
@@ -32,7 +37,7 @@ namespace SeaBattle2Lib.GameLogic
         {
             if (_firstPlayerHasToShoot)
             {
-                bool isWin = PlayerShot(1, coordinates);
+                bool isWin = PlayerShot(Player.First, coordinates);
                 _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
                 return new ShotResult(isWin, coordinates);
             }
@@ -44,7 +49,7 @@ namespace SeaBattle2Lib.GameLogic
         {
             if (!_firstPlayerHasToShoot)
             {
-                bool isWin = PlayerShot(2, coordinates);
+                bool isWin = PlayerShot(Player.Second, coordinates);
                 _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
                 return isWin;
             }
@@ -52,7 +57,7 @@ namespace SeaBattle2Lib.GameLogic
                 throw new OtherPlayerMustShootException("Player2Shot");
         }
 
-        private bool PlayerShot(int playerNumber, Coordinates coordinates)
+        private bool PlayerShot(Player player, Coordinates coordinates)
         {
             if (coordinates.X < 0 || Player2Map.Width <= coordinates.X)
                 throw new ArgumentOutOfRangeException(nameof(coordinates));
@@ -60,14 +65,14 @@ namespace SeaBattle2Lib.GameLogic
             if (coordinates.Y < 0 || Player2Map.Height <= coordinates.Y)
                 throw new ArgumentOutOfRangeException(nameof(coordinates));
 
-            switch (playerNumber)
+            switch (player)
             {
-                case 1:
+                case Player.First:
                     ChangeCell(ref _player2Map, coordinates);
                     //Перекрасить карту
                     RecolorMap(ref _player2Map);
                     break;
-                case 2 :
+                case Player.Second:
                     ChangeCell(ref _player1Map, coordinates);
                     //Перекрасить карту
                     RecolorMap(ref _player1Map);
@@ -76,16 +81,17 @@ namespace SeaBattle2Lib.GameLogic
                     throw new Exception("недопустимый номер игрока");
             }
 
-            
-
-            //TODO проверка на победу
-            return IsWin(playerNumber);
+            bool isWin = IsWin(player);
+            if (isWin)
+            {
+                Winner = player;
+                GameIsOn = false;
+            }
+            return isWin;
         }
 
         private void RecolorMap(ref Map map)
         {
-            List<Coordinates> damagedParts = new List<Coordinates>();
-
             for(int x = 0; x < map.Width; x++)
             {
                 for (int y = 0; y < map.Height; y++)
@@ -109,8 +115,6 @@ namespace SeaBattle2Lib.GameLogic
                     }
                 }
             }
-
-
         }
 
 
@@ -122,15 +126,15 @@ namespace SeaBattle2Lib.GameLogic
             if (map.CellsStatuses[coordinates.X, coordinates.Y] == CellStatus.DestroyedShip)
                 map.CellsStatuses[coordinates.X, coordinates.Y] = CellStatus.DamagedPartOfShip;
         }
-        private bool IsWin(int playerNumber)
+        private bool IsWin(Player player)
         {
             //Просмотреть карту, по которой стреляли
             //Если всё убито, то этот игрок убит
-            switch(playerNumber)
+            switch(player)
             {
-                case 1:
+                case Player.First:
                     return AllShipsAreKilled(ref _player2Map);
-                case 2:
+                case Player.Second:
                     return AllShipsAreKilled(ref _player1Map);
                 default:
                     throw new Exception("Недопустимый номер игрока");
@@ -198,5 +202,11 @@ namespace SeaBattle2Lib.GameLogic
             else
                 throw new Exception("Игра уже остановлена");
         }
+    }
+
+    public enum Player
+    {
+        First,
+        Second
     }
 }

@@ -38,10 +38,7 @@ namespace SeaBattle2TelegramServer
         {
             return _game.Player1AutoShot();
         }
-//        public bool ComputerShot()
-//        {
-//            return _game.Player2AutoShot();
-//        }
+
         public ShotResult ComputerShot()
         {
             return _game.Player2AutoShot();
@@ -60,35 +57,34 @@ namespace SeaBattle2TelegramServer
         
         public void SendPlayground(Message message, TelegramBotClient bot)
         {
-            if (_game.GameIsOn)
+            try
             {
-                try
-                {
-                    var fileStream = DrawingEngine.GetPlaygrounds(this);
-                    InputOnlineFile dichFile = new InputOnlineFile(fileStream);
-                    bot.SendPhotoAsync(message.From.Id, dichFile, caption: "Игровое поле.").Wait();
-                }
-                catch (Exception e)
-                {
-                    bot.SendTextMessageAsync(message.From.Id,
-                        $"Что-то навернулось при отправке картинки игрового поля. {e.Message}");
-                }
+                var fileStream = DrawingEngine.GetPlaygrounds(this);
+                InputOnlineFile dichFile = new InputOnlineFile(fileStream);
+                bot.SendPhotoAsync(message.From.Id, dichFile, caption: "Игровое поле.").Wait();
             }
-            else
+            catch (Exception e)
             {
-                bot.SendTextMessageAsync(message.From.Id, "Игра ещё не началась");
+                bot.SendTextMessageAsync(message.From.Id,
+                    $"Что-то навернулось при отправке картинки игрового поля. {e.Message}");
             }
+            
+            if (!_game.GameIsOn) bot.SendTextMessageAsync(message.From.Id, "Игровое поле для остановленой игры.");
         }
 
      
         public void SendWinMessage(TelegramBotClient bot)
         {
             bot.SendTextMessageAsync(gamerTelegramId, "Вы выиграли");
+            bot.SendPhotoAsync(gamerTelegramId, "AgADAgADua0xG-oUoEr8BKx4UMI1K2h2wQ8ABAEAAwIAA3gAA1CVAAIWBA");
         }
 
         public void SendLoseMessage(TelegramBotClient bot)
         {
             bot.SendTextMessageAsync(gamerTelegramId, "Вы проиграли");
+            bot.SendPhotoAsync(gamerTelegramId, "AgADAgADu60xG-oUoErMymSlk94eQdPwtw8ABAEAAwIAA3gAAzv6BgABFgQ");
         }
+
+        
     }
 }

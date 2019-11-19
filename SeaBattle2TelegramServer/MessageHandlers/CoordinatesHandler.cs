@@ -54,6 +54,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 if (computerShotResult.Victory)
                 {
                     session.SendLoseMessage(bot);
+                    SendPlayground(message, session, bot);
                     return;
                 }
                 SendPlayground(message, session, bot);

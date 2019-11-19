@@ -1,6 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBattle2Lib;
+using SeaBattle2Lib.Exceptions;
 using SeaBattle2Lib.GameLogic;
 using SeaBattle2Lib.Shooting;
 
@@ -38,5 +39,22 @@ namespace SeaBattle2Tests
             //Assert
             Assert.AreEqual(new Coordinates(4,4), shotCoordinates );
         }
+        
+        [TestMethod]
+        [ExpectedException(typeof(OtherPlayerMustShootException))]
+        public void Game_1()
+        {
+            //Arrange
+            Game game = new Game(10, 10);
+            
+            //Act
+            game.Player1AutoShot();
+            game.Player1AutoShot();
+
+        }
+        
+        
+        
+        
     }
 }
