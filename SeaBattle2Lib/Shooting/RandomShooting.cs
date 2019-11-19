@@ -10,7 +10,7 @@ namespace SeaBattle2Lib.Shooting
         {
             return GetCountOfDamagedParts(ref map) == 0 && HasAFreeCell(ref map);
         }
-        protected override Coordinates Shot(ref Map map, Random random)
+        protected override Coordinates Shot(ref Map map, Random random=null)
         {
             if (random == null) random = new Random();
             Console.WriteLine("RandomShooting");

@@ -1,4 +1,4 @@
-﻿namespace SeaBattle.Draw
+﻿namespace SeaBattle2TelegramServer.Draw
 {
     public enum PlaygroundType
     {

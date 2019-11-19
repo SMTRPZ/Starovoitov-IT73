@@ -1,5 +1,4 @@
-﻿using SeaBattle2Lib;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace SeaBattle2TelegramServer.MessageHandlers
@@ -9,7 +8,6 @@ namespace SeaBattle2TelegramServer.MessageHandlers
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
         {
             string text = message?.Text?.Trim();
-
             switch (text)
             {
                 case BotCommands.StartInteractingWithBotCommand:
@@ -17,6 +15,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         $"Привет! Давай сыграем в \"Морской Бой\". Для старта игры отправь мне команду  {BotCommands.StartNewGameCommand}");
                     return;
                 case BotCommands.StartNewGameCommand:
+                    //TODO снять ограничение на размер карты
                     int width = 10;
                     int height = 10;
                     session.RecreateGame(width, height);
@@ -36,8 +35,10 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         bot.SendTextMessageAsync(message.From.Id, "Игра не идёт");
                     return;
                 case BotCommands.AutoShotCommand:
+                    //TODO убрать реализацию отсюда
+                    //TODO нужно вынести её в отдельный класс
                     if(!session.Game.GameIsOn){
-                        bot.SendTextMessageAsync(message.From.Id, $"Игра ещё не началась. соре");
+                        bot.SendTextMessageAsync(message.From.Id, $"Игра ещё не началась. ");
                         return;
                     }
                     var coordinates = session.PlayerAutoShot();
@@ -49,10 +50,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                     session.SendPlayground(message, bot);
                     return;
             }
-
             Successor?.HandleMessage(message, session, bot);
         }
-        
-       
     }
 }

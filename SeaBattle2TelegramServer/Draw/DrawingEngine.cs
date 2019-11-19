@@ -2,10 +2,11 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using SeaBattle.Draw;
 using SeaBattle2Lib;
 using SeaBattle2Lib.GameLogic;
 
+
+//TODO оно умеет отрисовывать только 10 на 10
 namespace SeaBattle2TelegramServer.Draw
 {
     static class DrawingEngine

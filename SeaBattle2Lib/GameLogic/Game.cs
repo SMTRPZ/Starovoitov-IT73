@@ -27,8 +27,8 @@ namespace SeaBattle2Lib.GameLogic
         {
             GameIsOn = true;
             _firstPlayerHasToShoot = true;
-            _player1Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
-            _player2Map = Mapholder.GenerateFilledMap(mapWidth, mapHeight);
+            _player1Map = Mapholder.Mapholder.GenerateFilledMap(mapWidth, mapHeight);
+            _player2Map = Mapholder.Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             Winner = null;
         }
 

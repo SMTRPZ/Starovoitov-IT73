@@ -21,6 +21,7 @@
           <e p="FailedToMakeAShotException.cs" t="Include" />
           <e p="InvalidMapException.cs" t="Include" />
           <e p="InvalidMapSizeException.cs" t="Include" />
+          <e p="MapSizeIsTooSmallException.cs" t="Include" />
           <e p="OtherPlayerMustShootException.cs" t="Include" />
           <e p="TooFewDamagedPartsException.cs" t="Include" />
           <e p="TotalZrada.cs" t="Include" />
@@ -28,7 +29,6 @@
           <e p="WrongDamagedPartsLocationException.cs" t="Include" />
         </e>
         <e p="Experiments" t="Include">
-          <e p="Result.cs" t="Include" />
           <e p="ShotResult.cs" t="Include" />
         </e>
         <e p="GameLogic" t="Include">
@@ -36,8 +36,6 @@
           <e p="Coordinates.cs" t="Include" />
           <e p="Game.cs" t="Include" />
           <e p="Map.cs" t="Include" />
-          <e p="MapLayer.cs" t="Include" />
-          <e p="MapSizeIsTooSmallException.cs" t="Include" />
         </e>
         <e p="Mapholder" t="Include">
           <e p="Mapholder.cs" t="Include" />

@@ -15,7 +15,6 @@ namespace SeaBattle2Lib.Shooting
             new WtfShooting()
         };
         
-        
         public static Coordinates MakeShot(ref Map targetMap, Random random=null)
         {
             if(!targetMap.IsValid())

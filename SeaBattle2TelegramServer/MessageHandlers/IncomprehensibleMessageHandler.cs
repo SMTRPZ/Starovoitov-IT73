@@ -7,7 +7,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
     {
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)
         {
-            bot.SendTextMessageAsync(message.From.Id, "Отправьте /start, чтобы понять как мной пользоваться");
+            bot.SendTextMessageAsync(message.From.Id, $"Отправьте {BotCommands.StartInteractingWithBotCommand}, чтобы понять как мной пользоваться");
         }
     }
 }

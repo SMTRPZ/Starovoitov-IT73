@@ -14,15 +14,12 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 _firstHandler = messageHandler;
                 return;
             }
-            
             var currentHandler = _firstHandler;
             while (currentHandler.Successor!=null)
             {
                 currentHandler = currentHandler.Successor;
             }
-
             currentHandler.Successor = messageHandler;
-
         }
 
         public override void HandleMessage(Message message, TelegramSession session, TelegramBotClient bot)

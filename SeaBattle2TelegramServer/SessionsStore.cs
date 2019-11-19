@@ -14,7 +14,6 @@ namespace SeaBattle2TelegramServer
                 currentSession = new TelegramSession(message.From.Id);
                 Sessions.Add(message.From.Id, currentSession);
             }
-
             return currentSession;
         }
     }

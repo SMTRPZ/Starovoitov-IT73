@@ -23,7 +23,7 @@ namespace SeaBattle2Lib.Shooting
             {
                 coordinates = Shot(ref map, random);
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

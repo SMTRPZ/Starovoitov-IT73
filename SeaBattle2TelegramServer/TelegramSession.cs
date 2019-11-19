@@ -14,12 +14,12 @@ namespace SeaBattle2TelegramServer
         public Game Game => _game;
         private Game _game;
 
-        int gamerTelegramId;
+        readonly int _gamerTelegramId;
 
         public TelegramSession(int gamerTelegramId)
         {
             _game = new Game();
-            this.gamerTelegramId = gamerTelegramId;
+            _gamerTelegramId = gamerTelegramId;
         }
 
         public void RecreateGame(int width, int height)
@@ -75,14 +75,14 @@ namespace SeaBattle2TelegramServer
      
         public void SendWinMessage(TelegramBotClient bot)
         {
-            bot.SendTextMessageAsync(gamerTelegramId, "Вы выиграли");
-            bot.SendPhotoAsync(gamerTelegramId, "AgADAgADua0xG-oUoEr8BKx4UMI1K2h2wQ8ABAEAAwIAA3gAA1CVAAIWBA");
+            bot.SendTextMessageAsync(_gamerTelegramId, "Вы выиграли");
+            bot.SendPhotoAsync(_gamerTelegramId, "AgADAgADua0xG-oUoEr8BKx4UMI1K2h2wQ8ABAEAAwIAA3gAA1CVAAIWBA");
         }
 
         public void SendLoseMessage(TelegramBotClient bot)
         {
-            bot.SendTextMessageAsync(gamerTelegramId, "Вы проиграли");
-            bot.SendPhotoAsync(gamerTelegramId, "AgADAgADu60xG-oUoErMymSlk94eQdPwtw8ABAEAAwIAA3gAAzv6BgABFgQ");
+            bot.SendTextMessageAsync(_gamerTelegramId, "Вы проиграли");
+            bot.SendPhotoAsync(_gamerTelegramId, "AgADAgADu60xG-oUoErMymSlk94eQdPwtw8ABAEAAwIAA3gAAzv6BgABFgQ");
         }
 
         

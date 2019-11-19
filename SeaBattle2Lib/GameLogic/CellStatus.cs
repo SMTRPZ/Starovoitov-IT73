@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SeaBattle2Lib
+﻿namespace SeaBattle2Lib.GameLogic
 {
     public enum CellStatus
     {

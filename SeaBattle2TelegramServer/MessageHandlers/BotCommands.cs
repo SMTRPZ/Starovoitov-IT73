@@ -1,6 +1,6 @@
 ﻿namespace SeaBattle2TelegramServer.MessageHandlers
 {
-    public class BotCommands
+    public static class BotCommands
     {
         public const string StartNewGameCommand = "/start_new_game";
         public const string ShowPlaygroundCommand = "/show_playground";

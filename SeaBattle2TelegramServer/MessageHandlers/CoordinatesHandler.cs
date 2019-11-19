@@ -35,7 +35,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                 return;
             }
 
-            
+            //TODO код плохо читается
             try
             {
                 var playerShotCoordinates = new Coordinates(shotCoordinates[0], shotCoordinates[1]);

@@ -5,10 +5,9 @@ namespace SeaBattle2Lib.Shooting
 {
     public class WtfShooting : ShootingMethod
     {
-        protected override Coordinates Shot(ref Map map, Random random1)
+        protected override Coordinates Shot(ref Map map, Random random=null)
         {
-            Console.WriteLine("WtfShooting");
-            Random random = new Random();
+            if (random ==null) random = new Random();
             while (true)
             {
                 int x = random.Next(map.Width);
