@@ -19,16 +19,14 @@ namespace SeaBattle2TelegramServer.Draw
             if (game.Player1Map.Width != 10 || game.Player1Map.Height != 10 || game.Player2Map.Width != 10 ||game.Player2Map.Height != 10)
                 throw new NotImplementedException("Невозможно отрисовать карту, кроме размера 10 на 10");
 
-            using (Bitmap bitmap = new Bitmap(500, 500 + 100 + 500))
+            using Bitmap bitmap = new Bitmap(500, 500 + 100 + 500);
+            using (Graphics g = Graphics.FromImage(bitmap))
             {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    DrawGameMap(g, game);
-                }
-                string filePath = $"D:\\green{_fileCounter++}.jpg";
-                bitmap.Save(filePath, ImageFormat.Jpeg);
-                return new FileStream(filePath, FileMode.Open);
+                DrawGameMap(g, game);
             }
+            string filePath = $"D:\\green{_fileCounter++}.jpg";
+            bitmap.Save(filePath, ImageFormat.Jpeg);
+            return new FileStream(filePath, FileMode.Open);
         }
 
         private static void DrawGameMap(Graphics g, Game game)
@@ -97,34 +95,24 @@ namespace SeaBattle2TelegramServer.Draw
             int cellSize,
             int lineSize)
         {
-            
-            using (Font drawFont = new Font("Arial", 16))
-            {
-                using (SolidBrush drawBrush = new SolidBrush(Color.Black))
-                {
-                    StringFormat drawFormat = new StringFormat();
+            using Font drawFont = new Font("Arial", 16);
+            using SolidBrush drawBrush = new SolidBrush(Color.Black);
+            StringFormat drawFormat = new StringFormat();
 
-                    int index=0;
+            int index=0;
                     
-                    for (int xCoord = xCoordinate; xCoord < xCoordinate + 10 * (cellSize+lineSize) ;xCoord+=cellSize+lineSize)
-                    {
-                        graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoord, yCoordinate, drawFormat);
-                        index++;
-                    }
-
-                    index = 10;
-                    for (int yCoord = yCoordinate-10*(cellSize+lineSize); yCoord < yCoordinate; yCoord+=(cellSize+lineSize))
-                    {
-                        index--;
-                        graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoordinate-cellSize,yCoord, drawFormat);
-                    }
-                }
+            for (int xCoord = xCoordinate; xCoord < xCoordinate + 10 * (cellSize+lineSize) ;xCoord+=cellSize+lineSize)
+            {
+                graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoord, yCoordinate, drawFormat);
+                index++;
             }
-            
-            
-            
-            
-            
+
+            index = 10;
+            for (int yCoord = yCoordinate-10*(cellSize+lineSize); yCoord < yCoordinate; yCoord+=(cellSize+lineSize))
+            {
+                index--;
+                graphics.DrawString(index.ToString(), drawFont, drawBrush, xCoordinate-cellSize,yCoord, drawFormat);
+            }
         }
 
         private static void DrawUserObjects(

@@ -7,7 +7,7 @@ using SeaBattle2Lib.Shooting;
 namespace SeaBattle2Tests
 {
     [TestClass]
-    public class AiCrossfireShooting
+    public class NotAiCrossfireShooting
     {
         [TestMethod]
         public void CrossfireShooting_Right()

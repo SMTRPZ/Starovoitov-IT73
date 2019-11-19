@@ -8,7 +8,7 @@ using SeaBattle2Lib.Shooting;
 namespace SeaBattle2Tests
 {
     [TestClass]
-    public class AiAlongShooting
+    public class NotAiAlongShooting
     {
         [TestMethod]
         public void ShotAlong_1()

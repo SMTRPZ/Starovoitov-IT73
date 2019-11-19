@@ -8,7 +8,7 @@ using SeaBattle2Lib.Shooting;
 namespace SeaBattle2Tests
 {
     [TestClass]
-    public class AiRandomShooting
+    public class NotAiRandomShooting
     {
         [TestMethod]
         public void RandomShooting_1()

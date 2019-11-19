@@ -86,15 +86,14 @@
         <e p="TelegramSession.cs" t="Include" />
       </e>
       <e p="SeaBattle2Tests" t="IncludeRecursive">
-        <e p="AiAlongShooting.cs" t="Include" />
-        <e p="AiCrossfireShooting.cs" t="Include" />
-        <e p="AiRandomShooting.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="ConditionsForShootingMethodsTests.cs" t="Include" />
         <e p="GameTests.cs" t="Include" />
         <e p="MapCreatingTests.cs" t="Include" />
-        <e p="MapholderTests.cs" t="Include" />
         <e p="MapValidationTests.cs" t="Include" />
+        <e p="NotAiAlongShooting.cs" t="Include" />
+        <e p="NotAiCrossfireShooting.cs" t="Include" />
+        <e p="NotAiRandomShooting.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">
