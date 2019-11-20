@@ -30,18 +30,18 @@ namespace SeaBattle2TelegramServer
         public ShotResult ShootingForThePlayer(Coordinates coordinates)
         {
             if (_game.GameIsOn)
-                return _game.Player1Shot(coordinates);
-            else
-                throw new Exception("Игра не начата. Куда ты стреляешь?");
+                return _game.PlayerShot(Player.First, coordinates);
+            
+            throw new Exception("Игра не начата. Куда ты стреляешь?");
         }
-        public Coordinates PlayerAutoShot()
+        public ShotResult PlayerAutoShot()
         {
-            return _game.Player1AutoShot();
+            return _game.PlayerAutoShot(Player.First);
         }
 
         public ShotResult ComputerShot()
         {
-            return _game.Player2AutoShot();
+            return _game.PlayerAutoShot(Player.Second);
         }
         public bool TryEndGame()
         {

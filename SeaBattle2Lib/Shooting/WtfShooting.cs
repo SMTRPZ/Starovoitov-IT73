@@ -22,7 +22,7 @@ namespace SeaBattle2Lib.Shooting
 
         public override bool ConditionsAreMet(ref Map map)
         {
-            return HasAFreeCell(ref map);
+            return ShootingUtils.HasAFreeCell(ref map);
         }
     }
 }

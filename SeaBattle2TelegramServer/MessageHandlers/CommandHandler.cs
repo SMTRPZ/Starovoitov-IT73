@@ -41,7 +41,7 @@ namespace SeaBattle2TelegramServer.MessageHandlers
                         bot.SendTextMessageAsync(message.From.Id, $"Игра ещё не началась. ");
                         return;
                     }
-                    var coordinates = session.PlayerAutoShot();
+                    var coordinates = session.PlayerAutoShot().Coordinates;
                     session.ComputerShot();
                     bot.SendTextMessageAsync(message.From.Id, $"Автоматический выстрел за игрока по координатам x:{coordinates.X}, y:{coordinates.Y}.");
                     session.SendPlayground(message, bot);

@@ -48,8 +48,8 @@ namespace SeaBattle2Tests
             Game game = new Game(10, 10);
             
             //Act
-            game.Player1AutoShot();
-            game.Player1AutoShot();
+            game.PlayerAutoShot(Player.First);
+            game.PlayerAutoShot(Player.First);
 
         }
         

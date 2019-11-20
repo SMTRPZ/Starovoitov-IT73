@@ -15,50 +15,25 @@ namespace SeaBattle2Lib.GameLogic
         
         private Map _player1Map;
         private Map _player2Map;
+        private Player playerWhoseTurnToShoot;
         
         public bool GameIsOn { get; private set; }
-        private bool _firstPlayerHasToShoot;
-
-
         public Player? Winner { get; private set; }
-
-
         public Game(int mapWidth, int mapHeight)
         {
             GameIsOn = true;
-            _firstPlayerHasToShoot = true;
+            playerWhoseTurnToShoot = Player.First;
             _player1Map = Mapholder.Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             _player2Map = Mapholder.Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             Winner = null;
         }
-
-
-        public ShotResult Player1Shot(Coordinates coordinates)
+       
+        
+        public ShotResult PlayerShot(Player player, Coordinates coordinates)
         {
-            if (_firstPlayerHasToShoot)
-            {
-                bool isWin = PlayerShot(Player.First, coordinates);
-                _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
-                return new ShotResult(isWin, coordinates);
-            }
-            else
-                throw new OtherPlayerMustShootException("Player1Shot");
-        }
+            if (player != playerWhoseTurnToShoot)
+                throw new OtherPlayerMustShootException(player.ToString());
 
-        public bool Player2Shot(Coordinates coordinates)
-        {
-            if (!_firstPlayerHasToShoot)
-            {
-                bool isWin = PlayerShot(Player.Second, coordinates);
-                _firstPlayerHasToShoot = !_firstPlayerHasToShoot;
-                return isWin;
-            }
-            else
-                throw new OtherPlayerMustShootException("Player2Shot");
-        }
-
-        private bool PlayerShot(Player player, Coordinates coordinates)
-        {
             if (coordinates.X < 0 || Player2Map.Width <= coordinates.X)
                 throw new ArgumentOutOfRangeException(nameof(coordinates));
 
@@ -69,27 +44,28 @@ namespace SeaBattle2Lib.GameLogic
             {
                 case Player.First:
                     ChangeCell(ref _player2Map, coordinates);
-                    //Перекрасить карту
                     RecolorMap(ref _player2Map);
                     break;
                 case Player.Second:
                     ChangeCell(ref _player1Map, coordinates);
-                    //Перекрасить карту
                     RecolorMap(ref _player1Map);
                     break;
                 default:
                     throw new Exception("недопустимый номер игрока");
             }
-
+            if (player == Player.First)
+                playerWhoseTurnToShoot = Player.Second;
+            else
+                playerWhoseTurnToShoot = Player.First;
+            
             bool isWin = IsWin(player);
             if (isWin)
             {
                 Winner = player;
                 GameIsOn = false;
             }
-            return isWin;
+            return new ShotResult(isWin, coordinates);
         }
-
         private void RecolorMap(ref Map map)
         {
             for(int x = 0; x < map.Width; x++)
@@ -108,17 +84,15 @@ namespace SeaBattle2Lib.GameLogic
                 {
                     if (map.CellsStatuses[x, y] == CellStatus.PartOfShip)
                     {
-                        TryRedraw(ref map, new Coordinates(x+1,y));
-                        TryRedraw(ref map, new Coordinates(x-1,y));
-                        TryRedraw(ref map, new Coordinates(x,y+1));
-                        TryRedraw(ref map, new Coordinates(x,y-1));
+                        TryRedrawDestroyedCell(ref map, new Coordinates(x+1,y));
+                        TryRedrawDestroyedCell(ref map, new Coordinates(x-1,y));
+                        TryRedrawDestroyedCell(ref map, new Coordinates(x,y+1));
+                        TryRedrawDestroyedCell(ref map, new Coordinates(x,y-1));
                     }
                 }
             }
         }
-
-
-        private void TryRedraw(ref Map map, Coordinates coordinates)
+        private void TryRedrawDestroyedCell(ref Map map, Coordinates coordinates)
         {
             if (!map.CoordinatesAllowed(coordinates))
                 return;
@@ -140,7 +114,6 @@ namespace SeaBattle2Lib.GameLogic
                     throw new Exception("Недопустимый номер игрока");
             }
         }
-
         private bool AllShipsAreKilled(ref Map map)
         {
             for (int x = 0; x < map.Width; x++)
@@ -156,7 +129,6 @@ namespace SeaBattle2Lib.GameLogic
 
             return true;
         }
-
         private void ChangeCell(ref Map map, Coordinates coordinates)
         {
             switch (map.CellsStatuses[coordinates.X, coordinates.Y])
@@ -180,21 +152,24 @@ namespace SeaBattle2Lib.GameLogic
 
         }
         
-        public Coordinates Player1AutoShot()
+        public ShotResult PlayerAutoShot(Player player)
         {
-            var coordinates = NotAi.MakeShot(ref _player2Map);
-            Player1Shot(coordinates);
-            return coordinates;
+            Coordinates coordinates ;
+            switch (player)
+            {
+                case Player.First:
+                    coordinates = NotAi.MakeShot(ref _player2Map);
+                    break;
+                case Player.Second:
+                    coordinates = NotAi.MakeShot(ref _player1Map);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(player), player, null);
+            }
+            var shotResult = PlayerShot(player, coordinates);
+            return shotResult;
         }
         
-        public ShotResult Player2AutoShot()
-        {
-            var coordinates = NotAi.MakeShot(ref _player1Map);
-            Console.WriteLine($"Выстрел за компьютер по     координатам {coordinates}");
-            bool isThisPlayerWon = Player2Shot(coordinates);
-            return new ShotResult(isThisPlayerWon, coordinates);
-        }
-
         public void EndGame()
         {
             if (GameIsOn)

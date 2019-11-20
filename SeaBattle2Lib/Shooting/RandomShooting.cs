@@ -8,7 +8,7 @@ namespace SeaBattle2Lib.Shooting
     {
         public override bool ConditionsAreMet(ref Map map)
         {
-            return GetCountOfDamagedParts(ref map) == 0 && HasAFreeCell(ref map);
+            return ShootingUtils.GetCountOfDamagedParts(ref map) == 0 && ShootingUtils.HasAFreeCell(ref map);
         }
         protected override Coordinates Shot(ref Map map, Random random=null)
         {

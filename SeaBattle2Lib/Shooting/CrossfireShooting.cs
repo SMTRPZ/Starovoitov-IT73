@@ -50,7 +50,7 @@ namespace SeaBattle2Lib.Shooting
         }
         public override bool ConditionsAreMet(ref Map map)
         {
-            return GetCountOfDamagedParts(ref map) == 1;
+            return ShootingUtils.GetCountOfDamagedParts(ref map) == 1;
         }
     }
 }

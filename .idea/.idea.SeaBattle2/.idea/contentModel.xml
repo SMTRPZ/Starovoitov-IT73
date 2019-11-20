@@ -53,6 +53,7 @@
           <e p="NotAi.cs" t="Include" />
           <e p="RandomShooting.cs" t="Include" />
           <e p="ShootingMethod.cs" t="Include" />
+          <e p="ShootingUtils.cs" t="Include" />
           <e p="ShotAlong.cs" t="Include" />
           <e p="WtfShooting.cs" t="Include" />
         </e>
