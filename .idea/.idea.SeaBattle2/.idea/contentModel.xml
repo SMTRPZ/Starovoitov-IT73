@@ -81,6 +81,7 @@
           </e>
         </e>
         <e p="Program.cs" t="Include" />
+        <e p="readme.txt" t="Include" />
         <e p="SeaBattle2TelegramServer.csproj" t="IncludeRecursive" />
         <e p="SessionsStore.cs" t="Include" />
         <e p="TelegramNegotiator.cs" t="Include" />
