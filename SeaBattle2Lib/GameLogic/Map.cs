@@ -9,7 +9,6 @@ namespace SeaBattle2Lib.GameLogic
         public readonly int Height;
         public readonly int Width;
         public readonly CellStatus[,] CellsStatuses;
-        
         public Map(int width, int height)
         {
             if (width < 1 || height < 1)
@@ -18,7 +17,7 @@ namespace SeaBattle2Lib.GameLogic
             Height = height;
             CellsStatuses = new CellStatus[width, height];
         }
-
+        //Проверка на выхд за пределы карты
         public bool CoordinatesAllowed(Coordinates coordinates)
         {
             int x = coordinates.X;
@@ -32,7 +31,7 @@ namespace SeaBattle2Lib.GameLogic
 
             return true;
         }
-        
+        //Проверка на расположение кораблей
         public bool IsValid()
         {
             if (Width == 0 || Height == 0)
@@ -73,15 +72,13 @@ namespace SeaBattle2Lib.GameLogic
                 return true;
             }
         }
-
+        //TODO предать огню
         private static bool CellIsShip(CellStatus cellStatus)
         {
             return cellStatus == CellStatus.PartOfShip ||
                    cellStatus == CellStatus.DamagedPartOfShip ||
                    cellStatus == CellStatus.DestroyedShip;
         }
-        
-    
         public override bool Equals(object obj)
         {
             if (!(obj is Map))
@@ -102,8 +99,7 @@ namespace SeaBattle2Lib.GameLogic
             }
 
             return true;
-        }    
-
+        }
         public override int GetHashCode()
         {
             unchecked
@@ -114,12 +110,10 @@ namespace SeaBattle2Lib.GameLogic
                 return hash;
             }
         }
-
         public static bool operator ==(Map left, Map right)
         {
             return left.Equals(right);
         }
-
         public static bool operator !=(Map left, Map right)
         {
             return !(left == right);

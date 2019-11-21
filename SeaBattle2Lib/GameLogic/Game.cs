@@ -10,13 +10,11 @@ namespace SeaBattle2Lib.GameLogic
 {
     public struct Game
     {
-        public Map Player1Map => _player1Map;
-        public Map Player2Map => _player2Map;
-        
         private Map _player1Map;
         private Map _player2Map;
         private Player playerWhoseTurnToShoot;
-        
+        public Map Player1Map => _player1Map;
+        public Map Player2Map => _player2Map;
         public bool GameIsOn { get; private set; }
         public Player? Winner { get; private set; }
         public Game(int mapWidth, int mapHeight)
@@ -27,8 +25,6 @@ namespace SeaBattle2Lib.GameLogic
             _player2Map = Mapholder.Mapholder.GenerateFilledMap(mapWidth, mapHeight);
             Winner = null;
         }
-       
-        
         public ShotResult PlayerShot(Player player, Coordinates coordinates)
         {
             if (player != playerWhoseTurnToShoot)
@@ -151,7 +147,6 @@ namespace SeaBattle2Lib.GameLogic
             }
 
         }
-        
         public ShotResult PlayerAutoShot(Player player)
         {
             Coordinates coordinates ;
@@ -169,7 +164,6 @@ namespace SeaBattle2Lib.GameLogic
             var shotResult = PlayerShot(player, coordinates);
             return shotResult;
         }
-        
         public void EndGame()
         {
             if (GameIsOn)

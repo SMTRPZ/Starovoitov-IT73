@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="SeaBattle2Lib.Shooting.Ai">
+  <Class Name="SeaBattle2Lib.Shooting.NotAi">
     <Position X="1" Y="6.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkA=</HashCode>
-      <FileName>Shooting\AI.cs</FileName>
+      <FileName>Shooting\NotAi.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="Methods" />
@@ -13,7 +13,7 @@
   <Class Name="SeaBattle2Lib.Shooting.RandomShooting">
     <Position X="0.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shooting\RandomShooting.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -22,13 +22,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shooting\ShotAlong.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SeaBattle2Lib.Mapholder">
-    <Position X="8.5" Y="4.75" Width="6" />
-    <TypeIdentifier>
-      <HashCode>AAAAABAAAQAAAIAAgAABAAAAEQAAIQAIAAJEQABAAAA=</HashCode>
-      <FileName>Mapholder\Mapholder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SeaBattle2Lib.Shooting.CrossfireShooting">
@@ -48,14 +41,14 @@
   <Class Name="SeaBattle2Lib.Shooting.ShootingMethod" Collapsed="true">
     <Position X="5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAgAAKAAAAAAAAAAIAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAAAAABAgAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shooting\ShootingMethod.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="SeaBattle2Lib.GameLogic.Map">
     <Position X="6.25" Y="1.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAABAhAAAAAAAgAgAAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <HashCode>AAAAAABABAAAAAAAgAgIAEAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>GameLogic\Map.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -70,9 +63,9 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="SeaBattle2Lib.GameLogic.Game">
-    <Position X="1.25" Y="1.75" Width="3.5" />
+    <Position X="1.25" Y="1.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAEMAAICBAAAAIAAAAAAAAAAAAAAAIAAgAAAAAAQBGA=</HashCode>
+      <HashCode>AAAMAAoAFAACAIAAAACAAAAAAAAAAIAgAAAgAAAQFAA=</HashCode>
       <FileName>GameLogic\Game.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -80,7 +73,7 @@
       <Property Name="Player2Map" />
     </ShowAsAssociation>
   </Struct>
-  <Enum Name="SeaBattle2Lib.CellStatus">
+  <Enum Name="SeaBattle2Lib.GameLogic.CellStatus">
     <Position X="10" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAEAAAAAAAAAAAAAAAAAAAgAAAAACAAAACAAAA=</HashCode>

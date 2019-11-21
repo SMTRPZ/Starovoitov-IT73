@@ -15,7 +15,8 @@ namespace SeaBattle2Lib.Shooting
             throw new NotImplementedException();
         }
 
-        public bool TryToShot(ref Map map, out Coordinates coordinates, Random random=null)
+        public bool TryToShot(ref Map map, out Coordinates coordinates,
+            Random random=null)
         {
             coordinates = new Coordinates();
             if (!ConditionsAreMet(ref map)) return false;
@@ -29,7 +30,5 @@ namespace SeaBattle2Lib.Shooting
             }
             return true;
         }
-
-      
     }
 }
